@@ -10,6 +10,8 @@ govuk_colours <- c(
   "black" = "#0b0c0c"
 )
 
+default_colour <- govuk_colours[[1]]
+
 govuk_cols <- function(...) {
   cols <- c(...)
 

@@ -34,6 +34,21 @@ format_label_continuous <- function(label_format, ...) {
   }
 }
 
+check_aesthetic <- function(aesthetic) {
+  aesthetic_names <- names(aesthetic)
+  list(
+    x = "x" %in% aesthetic_names,
+    y = "y" %in% aesthetic_names,
+    fill = "fill" %in% aesthetic_names,
+    colour = any(c("colour", "color") %in% aesthetic_names),
+    ymax  = "ymax" %in% aesthetic_names,
+    ymin = "ymin" %in% aesthetic_names,
+    xmax = "xmax" %in% aesthetic_names,
+    xmin = "xmin" %in% aesthetic_names,
+    label = "label" %in% aesthetic_names
+  )
+}
+
 # Chart Templates ----
 
 #' @title FUNCTION_TITLE
@@ -75,6 +90,7 @@ fbs_barplot <- function(
 ) {
 
   plot_type <- "bar"
+  aes_spec <- check_aesthetic(aesthetic)
 
   to_plot <- data
 
@@ -82,7 +98,7 @@ fbs_barplot <- function(
   p <- to_plot %>%
     ggplot2::ggplot(aesthetic) +
     # Add bar plot
-    ggplot2::geom_bar(stat = "identity", position = ggplot2::position_dodge(), width = 0.75) +
+    geom_fbsbar() +
     # Add line at 0
     ggplot2::geom_hline(yintercept = 0)
 
@@ -138,11 +154,15 @@ fbs_barplot <- function(
       ggplot2::labs(subtitle = value_name)
   }
 
-  p <- p +
-    scale_fill_govuk()
+  # Add scale if fill passed into aesthetic
+  if (aes_spec$fill) {
+    p <- p +
+      scale_fill_govuk()
+  }
 
   # Add default styling
-  p <- p + theme_fbs()
+  p <- p +
+    theme_fbs()
 
   # Adjust for horizontal
   if (horizontal) {
