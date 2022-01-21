@@ -9,7 +9,7 @@ fbs_distribution_plot(
   aesthetic,
   title = NULL,
   value_name = NULL,
-  horizontal = TRUE,
+  horizontal = FALSE,
   continuous_format = "percent"
 )
 }

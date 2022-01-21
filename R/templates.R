@@ -12,27 +12,16 @@ set_label_position <- function(max_value, position_scaler = 0.025) {
 }
 
 format_label_continuous <- function(label_format, ...) {
-
-  if (label_format == "identity") {
-    return(scales::label_number(...))
-  }
-
-  if (label_format == "comma") {
-    return(scales::label_comma(...))
-  }
-
-  if (label_format == "percent") {
-    return(scales::label_percent(..., accuracy = 1))
-  }
-
-  if (label_format == "abbreviated") {
-    return(scales::label_number_si(...))
-  }
-
-  if (label_format == "scientific") {
-    return(scales::label_scientific(...))
-  }
+  switch(label_format,
+    "identity" = scales::label_number(...),
+    "comma" = scales::label_comma(...),
+    "percent" = scales::label_percent(..., accuracy = 1),
+    "abbreviated" = scales::label_number_si(...),
+    "scientific" = scales::label_scientific(...),
+    stop(paste0("Unknown label format: ", label_format))
+  )
 }
+
 
 check_aesthetic <- function(aesthetic) {
   aesthetic_names <- names(aesthetic)
@@ -132,7 +121,8 @@ fbs_barplot <- function(
   }
 
   # Add labels
-  p <- p + ggplot2::labs(title = title)
+  p <- p +
+    ggplot2::labs(title = title)
 
   # Add scales
   if (horizontal) {
@@ -141,7 +131,7 @@ fbs_barplot <- function(
       ggplot2::scale_y_continuous(
         breaks = scales::pretty_breaks(6),
         labels = format_label_continuous(continuous_format),
-        expand = ggplot2::expansion(mult = c(0, 0.1))
+        expand = ggplot2::expansion(mult = c(0, 0.2))
       ) +
       ggplot2::ylab(value_name)
   } else {
@@ -217,7 +207,8 @@ fbs_stackplot <- function(
     ggplot2::geom_hline(yintercept = 0)
 
   # Add labels
-  p <- p + ggplot2::labs(title = title)
+  p <- p +
+    ggplot2::labs(title = title)
 
   # Add scales
   if (horizontal) {
@@ -282,7 +273,7 @@ fbs_distribution_plot <- function(
   aesthetic,
   title = NULL,
   value_name = NULL,
-  horizontal = TRUE,
+  horizontal = FALSE,
   continuous_format = "percent"
 ) {
 
