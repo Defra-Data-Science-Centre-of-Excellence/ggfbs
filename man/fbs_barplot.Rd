@@ -52,5 +52,5 @@ if(interactive()){
 }
 }
 \seealso{
-\code{\link[ggplot2]{geom_bar}}, \code{\link[ggplot2]{aes}}
+\code{\link[ggplot2]{geom_bar}},\code{\link[ggplot2]{aes}}
 }

@@ -367,7 +367,7 @@ fbs_lineplot <- function(
   p <- to_plot %>%
     ggplot2::ggplot(aesthetic) +
     # Add bar plot
-    ggplot2::geom_line(size = 1.5, stat = "identity") +
+    geom_fbsline() +
     # Add line at 0
     ggplot2::geom_hline(yintercept = 0)
 

@@ -57,3 +57,59 @@ geom_fbsbar <- function(mapping = NULL,
     )
   )
 }
+
+# Line plot
+GeomfbsLine <- ggplot2::ggproto("GeomfbsLine", ggplot2::GeomLine,
+                                default_aes = ggplot2::aes(
+                                  colour = default_colour,
+                                  size = 1.5, linetype = 1, alpha = NA)
+)
+
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+#' @param mapping PARAM_DESCRIPTION, Default: NULL
+#' @param data PARAM_DESCRIPTION, Default: NULL
+#' @param stat PARAM_DESCRIPTION, Default: 'identity'
+#' @param position PARAM_DESCRIPTION, Default: 'identity'
+#' @param na.rm PARAM_DESCRIPTION, Default: FALSE
+#' @param orientation PARAM_DESCRIPTION, Default: NA
+#' @param show.legend PARAM_DESCRIPTION, Default: NA
+#' @param inherit.aes PARAM_DESCRIPTION, Default: TRUE
+#' @param ... PARAM_DESCRIPTION
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @seealso
+#'  \code{\link[ggplot2]{layer}}
+#' @rdname geom_fbsline
+#' @export
+#' @importFrom ggplot2 layer
+geom_fbsline <- function(mapping = NULL,
+                         data = NULL,
+                         stat = "identity",
+                         position = "identity",
+                         na.rm = FALSE,
+                         orientation = NA,
+                         show.legend = NA,
+                         inherit.aes = TRUE,
+                         ...) {
+
+  ggplot2::layer(
+    data = data,
+    mapping = mapping,
+    stat = stat,
+    geom = GeomfbsLine,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      na.rm = na.rm,
+      orientation = orientation,
+      ...)
+  )
+}
