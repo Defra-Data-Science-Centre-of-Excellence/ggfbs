@@ -14,4 +14,7 @@ Imports:
     scales (>= 1.1.1),
     rlang (>= 0.4.10),
     magrittr (>= 2.0.1)
+Suggests: 
+    testthat (>= 3.0.0)
 RoxygenNote: 7.1.1
+
