@@ -75,6 +75,7 @@ fbs_barplot <- function(
   horizontal = FALSE,
   label_bars = FALSE,
   label_position = "top",
+  legend_hide = FALSE,
   continuous_format = "comma"
 ) {
 
@@ -160,6 +161,12 @@ fbs_barplot <- function(
       theme_fbs_h()
   }
 
+  # Hide legend if requested
+  if (legend_hide) {
+    p <- p +
+      ggplot2::theme(legend.position = "none", plot.subtitle = ggplot2::element_text(vjust = 0))
+  }
+
   p
 }
 
@@ -191,6 +198,7 @@ fbs_stackplot <- function(
   title = NULL,
   value_name = NULL,
   horizontal = FALSE,
+  legend_hide = FALSE,
   continuous_format = "comma"
 ) {
 
@@ -245,6 +253,12 @@ fbs_stackplot <- function(
       theme_fbs_h()
   }
 
+  # Hide legend if requested
+  if (legend_hide) {
+    p <- p +
+      ggplot2::theme(legend.position = "none", plot.subtitle = ggplot2::element_text(vjust = 0))
+  }
+
   p
 }
 
@@ -274,6 +288,7 @@ fbs_distribution_plot <- function(
   title = NULL,
   value_name = NULL,
   horizontal = FALSE,
+  legend_hide = FALSE,
   continuous_format = "percent"
 ) {
 
@@ -325,6 +340,12 @@ fbs_distribution_plot <- function(
       theme_fbs_h()
   }
 
+  # Hide legend if requested
+  if (legend_hide) {
+    p <- p +
+      ggplot2::theme(legend.position = "none", plot.subtitle = ggplot2::element_text(vjust = 0))
+  }
+
   p
 }
 
@@ -355,7 +376,7 @@ fbs_lineplot <- function(
   aesthetic,
   title = NULL,
   value_name = NULL,
-  include_legend = TRUE,
+  legend_hide = FALSE,
   continuous_format = "comma"
 ) {
 
@@ -390,7 +411,13 @@ fbs_lineplot <- function(
   # Add default styling
   p <- p +
     theme_fbs() +
-    theme_fbs_line(include_legend = include_legend)
+    theme_fbs_line()
+
+  # Hide legend if requested
+  if (legend_hide) {
+    p <- p +
+      ggplot2::theme(legend.position = "none", plot.subtitle = ggplot2::element_text(vjust = 0))
+  }
 
   p
 }

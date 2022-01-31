@@ -91,14 +91,8 @@ theme_fbs_h <- function() {
 
 # Apply to line templates
 theme_fbs_line <- function(include_legend = TRUE) {
-  t <- theme(
+  theme(
     panel.grid.major.x = ggplot2::element_line(color = "#cbcbcb"),
     axis.ticks.x = ggplot2::element_blank()
   )
-
-  if (include_legend == FALSE) {
-    t <- t +
-      ggplot2::theme(legend.position = "none", plot.subtitle = ggplot2::element_text(vjust = 0))
-  }
-  t
 }
