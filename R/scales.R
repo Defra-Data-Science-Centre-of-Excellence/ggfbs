@@ -12,6 +12,19 @@ govuk_colours <- c(
 
 default_colour <- govuk_colours[[1]]
 
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+#' @param ... PARAM_DESCRIPTION
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname govuk_cols
+#' @export
 govuk_cols <- function(...) {
   cols <- c(...)
 
@@ -22,6 +35,19 @@ govuk_cols <- function(...) {
   govuk_colours[cols]
 }
 
+#' @title FUNCTION_TITLE
+#' @description FUNCTION_DESCRIPTION
+
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname govuk_pal
+#' @export
 govuk_pal <- function() {
   function(n) {
     unname(govuk_cols(1:n))
