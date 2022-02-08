@@ -8,7 +8,7 @@ test_that("fbs_barplot generates base plot with no errors", {
   )
 
   p <- plot_data %>%
-    fbs_barplot(aes(x = x, y = y))
+    fbs_barplot(ggplot2::aes(x = x, y = y))
 
     expect_true(ggplot2::is.ggplot(p))
     expect_silent(print(p))
@@ -23,7 +23,7 @@ test_that("fbs_barplot generates grouped plot with no errors", {
   )
 
   p <- plot_data %>%
-    fbs_barplot(aes(x = x, y = y, fill = f))
+    fbs_barplot(ggplot2::aes(x = x, y = y, fill = f))
 
   expect_true(ggplot2::is.ggplot(p))
   expect_silent(print(p))
@@ -38,7 +38,7 @@ test_that("fbs_stackplot generates base plot with no errors", {
   )
 
   p <- plot_data %>%
-    fbs_stackplot(aes(x = x, y = y, fill = f))
+    fbs_stackplot(ggplot2::aes(x = x, y = y, fill = f))
 
   expect_true(ggplot2::is.ggplot(p))
   expect_silent(print(p))
@@ -57,7 +57,7 @@ test_that("fbs_distribution_plot generates base plot with no error", {
   )
 
   p <- plot_data %>%
-    fbs_distribution_plot(aes(x = x, y = y, fill = f))
+    fbs_distribution_plot(ggplot2::aes(x = x, y = y, fill = f))
 
   expect_true(ggplot2::is.ggplot(p))
   expect_silent(print(p))
@@ -75,7 +75,7 @@ test_that("fbs_lineplot generates base plot with no error", {
   )
 
  p <-  plot_data %>%
-    fbs_lineplot(aes(x = x, y = y, group = 1))
+    fbs_lineplot(ggplot2::aes(x = x, y = y, group = 1))
 
   expect_true(ggplot2::is.ggplot(p))
   expect_silent(print(p))
