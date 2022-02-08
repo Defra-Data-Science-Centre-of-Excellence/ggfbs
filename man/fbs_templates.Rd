@@ -101,7 +101,7 @@ layers.
 
 \itemize{
   \item \code{fill: \link{scale_fill_govuk}}
-  \item \code{colour: \link{scale_color_govuk}}
+  \item \code{colour: \link{scale_colour_govuk}}
 }
 }
 \examples{

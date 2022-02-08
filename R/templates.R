@@ -59,7 +59,7 @@ check_aesthetic <- function(aesthetic) {
 #'
 #' \itemize{
 #'   \item \code{fill: \link{scale_fill_govuk}}
-#'   \item \code{colour: \link{scale_color_govuk}}
+#'   \item \code{colour: \link{scale_colour_govuk}}
 #' }
 #'
 #' @param data Default dataset used for plot creation, passed into \code{\link[ggplot2]{ggplot}}.
@@ -374,7 +374,7 @@ fbs_lineplot <- function(
 
 
   p <- p +
-    scale_color_govuk()
+    scale_colour_govuk()
 
   # Add default styling and additonal styling for line plot
   p <- p +

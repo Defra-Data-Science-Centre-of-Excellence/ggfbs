@@ -21,7 +21,7 @@ colour scheme used within the templates.
 # Add the FBS theme to a basic boxplot
 ggplot(mpg, aes(class, hwy, colour = drv)) +
   geom_boxplot(size = 1.2) +
-  scale_color_govuk() +
+  scale_colour_govuk() +
   theme_fbs()
 }
 \seealso{

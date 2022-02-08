@@ -66,7 +66,7 @@ govuk_cols <- function(...) {
 #'
 #' @details
 #' Calling the govuk_pal will return the palette function passed into
-#' \code{\link{scale_color_govuk}} and \code{\link{scale_fill_govuk.}}.
+#' \code{\link{scale_colour_govuk}} and \code{\link{scale_fill_govuk.}}.
 #'
 #' This function can also be used to return a character vector containing \code{x} number of
 #' colours with the syntax \code{govuk_pal()(x)}. For example, \code{govuk_pal()(5)} will return a
@@ -101,17 +101,17 @@ govuk_pal <- function() {
 #' # Add the FBS theme to a basic boxplot
 #' ggplot(mpg, aes(class, hwy, colour = drv)) +
 #'   geom_boxplot(size = 1.2) +
-#'   scale_color_govuk() +
+#'   scale_colour_govuk() +
 #'   theme_fbs()
 #' @seealso
 #' \code{\link[ggplot2]{discrete_scale}}
-#' @name scale_color_govuk
+#' @name scale_colour_govuk
 #' @export
-scale_color_govuk <- function(...) {
+scale_colour_govuk <- function(...) {
   ggplot2::discrete_scale("colour", "govuk", govuk_pal(), ...)
 }
 
-#' @rdname scale_color_govuk
+#' @rdname scale_colour_govuk
 #' @export
 scale_fill_govuk <- function(...) {
   ggplot2::discrete_scale("fill", "govuk", govuk_pal(), ...)
