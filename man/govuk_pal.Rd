@@ -2,23 +2,26 @@
 % Please edit documentation in R/scales.R
 \name{govuk_pal}
 \alias{govuk_pal}
-\title{FUNCTION_TITLE}
+\title{gov.uk Colour Palette}
 \usage{
 govuk_pal()
 }
 \value{
-OUTPUT_DESCRIPTION
+Palette function similar to those found in the scales package (e.g.
+\code{\link[scales]{hue_pal}}).
 }
 \description{
-FUNCTION_DESCRIPTION
+Palette function similar to those found within the scales package.
 }
 \details{
-DETAILS
+Calling the govuk_pal will return the palette function passed into
+\code{\link{scale_color_govuk}} and \code{\link{scale_fill_govuk.}}.
+
+This function can also be used to return a character vector containing \code{x} number of
+colours with the syntax \code{govuk_pal()(x)}. For example, \code{govuk_pal()(5)} will return a
+character vector of 5 colours. \strong{Note}: Unlike \code{\link{govuk_cols}}, named colours are
+not accepted. Only a single number may be passed into the palette.
 }
 \examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+
 }

@@ -2,28 +2,33 @@
 % Please edit documentation in R/scales.R
 \name{scale_color_govuk}
 \alias{scale_color_govuk}
-\title{FUNCTION_TITLE}
+\alias{scale_fill_govuk}
+\title{Discrete scales in the gov.uk style}
 \usage{
 scale_color_govuk(...)
+
+scale_fill_govuk(...)
 }
 \arguments{
-\item{...}{PARAM_DESCRIPTION}
-}
-\value{
-OUTPUT_DESCRIPTION
+\item{...}{Other arguments passed on to \link[ggplot2]{discrete_scale}}
 }
 \description{
-FUNCTION_DESCRIPTION
+Provides a discrete colour scheme in the gov.uk type. See \code{\link{govuk_cols}} for the list
+of colours used within these scales.
 }
 \details{
-DETAILS
+These scales are automatically applied within each chart template when their respective
+aesthetics is provided within the aesthetic specification.
+
+These scales can additionally be added to non-template charts to provide the colour scheme used
+within the templates.
 }
 \examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+# Add the FBS theme to a basic boxplot
+ggplot(mpg, aes(class, hwy, colour = drv)) +
+  geom_boxplot(size = 1.2) +
+  scale_color_govuk() +
+  theme_fbs()
 }
 \seealso{
 \code{\link[ggplot2]{discrete_scale}}

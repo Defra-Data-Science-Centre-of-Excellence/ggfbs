@@ -1,18 +1,24 @@
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' Farm Business Survey Theme
+#'
+#' Apply the Farm Business Survey (FBS) theme to any plot
+#'
+#' @details
+#' Applies the default FBS theme to a plot. By default this is applied to any of the chart templates
+#' within this package.
+#'
+#' This function enables the application of the FBS theme to charts which do not have a set
+#' template. This can be combined with the scale_*_govuk set of functions to match the theming and
+#' colour scheme used within the templates.
 #' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
+#' # Add the FBS theme to a basic boxplot
+#' ggplot(mpg, aes(class, hwy, colour = drv)) +
+#'   geom_boxplot(size = 1.2) +
+#'   scale_color_govuk() +
+#'   theme_fbs()
 #' @seealso
-#'  \code{\link[ggplot2]{theme}},\code{\link[ggplot2]{margin}}
+#'  \code{\link[ggplot2]{theme}}
 #' @rdname theme_fbs
 #' @export
-#' @importFrom ggplot2 theme element_text element_blank margin element_line element_rect
 theme_fbs <- function() {
   font <- "sans"
 
@@ -73,7 +79,6 @@ theme_fbs <- function() {
   )
 }
 
-# Theme apply to templates when horizontal
 theme_fbs_h <- function() {
   theme(
     # Gridlines
@@ -86,13 +91,5 @@ theme_fbs_h <- function() {
     # Axis text
     axis.text.y = ggplot2::element_text(margin = ggplot2::margin(5, b = 10)),
     axis.title.x = ggplot2::element_text(size = 20)
-  )
-}
-
-# Apply to line templates
-theme_fbs_line <- function(include_legend = TRUE) {
-  theme(
-    panel.grid.major.x = ggplot2::element_line(color = "#cbcbcb"),
-    axis.ticks.x = ggplot2::element_blank()
   )
 }

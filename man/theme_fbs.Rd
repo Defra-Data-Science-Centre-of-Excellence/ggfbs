@@ -2,26 +2,28 @@
 % Please edit documentation in R/themes.R
 \name{theme_fbs}
 \alias{theme_fbs}
-\title{FUNCTION_TITLE}
+\title{Farm Business Survey Theme}
 \usage{
 theme_fbs()
 }
-\value{
-OUTPUT_DESCRIPTION
-}
 \description{
-FUNCTION_DESCRIPTION
+Apply the Farm Business Survey (FBS) theme to any plot
 }
 \details{
-DETAILS
+Applies the default FBS theme to a plot. By default this is applied to any of the chart templates
+within this package.
+
+This function enables the application of the FBS theme to charts which do not have a set
+template. This can be combined with the scale_*_govuk set of functions to match the theming and
+colour scheme used within the templates.
 }
 \examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+# Add the FBS theme to a basic boxplot
+ggplot(mpg, aes(class, hwy, colour = drv)) +
+  geom_boxplot(size = 1.2) +
+  scale_color_govuk() +
+  theme_fbs()
 }
 \seealso{
-\code{\link[ggplot2]{theme}},\code{\link[ggplot2]{margin}}
+\code{\link[ggplot2]{theme}}
 }

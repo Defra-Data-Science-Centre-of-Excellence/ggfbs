@@ -5,31 +5,15 @@ GeomfbsBar <- ggplot2::ggproto("GeomfbsBar", ggplot2::GeomBar,
                                  size = 0.5, linetype = 1, alpha = NA)
                                )
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param mapping PARAM_DESCRIPTION, Default: NULL
-#' @param data PARAM_DESCRIPTION, Default: NULL
-#' @param stat PARAM_DESCRIPTION, Default: 'identity'
-#' @param position PARAM_DESCRIPTION, Default: 'dodge'
-#' @param ... PARAM_DESCRIPTION
-#' @param width PARAM_DESCRIPTION, Default: 0.75
-#' @param na.rm PARAM_DESCRIPTION, Default: FALSE
-#' @param orientation PARAM_DESCRIPTION, Default: NA
-#' @param show.legend PARAM_DESCRIPTION, Default: NA
-#' @param inherit.aes PARAM_DESCRIPTION, Default: TRUE
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @seealso
-#'  \code{\link[ggplot2]{geom_bar}}
-#' @rdname geom_fbsbar
+#' geom_fbsbar
+#'
+#' Wrapper for \link[ggplot2]{geom_bar} using default FBS style.
+#'
+#' @details
+#' See \code{\link[ggplot2]{geom_bar}} for function details.
+#' @inheritParams ggplot2::geom_bar
+#' @inheritParams ggplot2::layer
 #' @export
-#' @importFrom ggplot2 layer
 geom_fbsbar <- function(mapping = NULL,
                         data = NULL,
                         stat = "identity",
@@ -65,30 +49,15 @@ GeomfbsLine <- ggplot2::ggproto("GeomfbsLine", ggplot2::GeomLine,
                                   size = 1.5, linetype = 1, alpha = NA)
 )
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param mapping PARAM_DESCRIPTION, Default: NULL
-#' @param data PARAM_DESCRIPTION, Default: NULL
-#' @param stat PARAM_DESCRIPTION, Default: 'identity'
-#' @param position PARAM_DESCRIPTION, Default: 'identity'
-#' @param na.rm PARAM_DESCRIPTION, Default: FALSE
-#' @param orientation PARAM_DESCRIPTION, Default: NA
-#' @param show.legend PARAM_DESCRIPTION, Default: NA
-#' @param inherit.aes PARAM_DESCRIPTION, Default: TRUE
-#' @param ... PARAM_DESCRIPTION
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @seealso
-#'  \code{\link[ggplot2]{layer}}
-#' @rdname geom_fbsline
+#' geom_fbsline
+#'
+#' Wrapper for \link[ggplot2]{geom_line} using default FBS style.
+#'
+#' @details
+#' See \code{\link[ggplot2]{geom_line}} for function details.
+#' @inheritParams ggplot2::geom_line
+#' @inheritParams ggplot2::layer
 #' @export
-#' @importFrom ggplot2 layer
 geom_fbsline <- function(mapping = NULL,
                          data = NULL,
                          stat = "identity",

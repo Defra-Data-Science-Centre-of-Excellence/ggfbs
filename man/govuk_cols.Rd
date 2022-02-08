@@ -2,26 +2,48 @@
 % Please edit documentation in R/scales.R
 \name{govuk_cols}
 \alias{govuk_cols}
-\title{FUNCTION_TITLE}
+\title{gov.uk Colours}
 \usage{
 govuk_cols(...)
 }
 \arguments{
-\item{...}{PARAM_DESCRIPTION}
+\item{...}{character or numeric vector denoting the colours of the palette to return. See details
+for list of colours}
 }
 \value{
-OUTPUT_DESCRIPTION
+Named vector of colours.
 }
 \description{
-FUNCTION_DESCRIPTION
+Generate a named vector of colours in the order they would appear when within the
+automatically generated charts on gov.uk.
 }
 \details{
-DETAILS
+Colours available in palette in order of appearance are:
+
+\enumerate{
+  \item "blue" = "#1d70b8",
+  \item "turquoise"" = "#28a197"
+  \item "green" = "#00703c",
+  \item "light-green" = "#85994b",
+  \item "yellow" = "#ffdd00",
+  \item "orange" = "#f47738",
+  \item "red" = "#d4351c",
+  \item "bright-purple" = "#912b88",
+  \item "black" = "#0b0c0c"
+  }
 }
 \examples{
-\dontrun{
-if(interactive()){
- #EXAMPLE1
- }
-}
+# Return all colours in the palette
+govuk_cols()
+
+# Return the first colour in the palette by number
+govuk_cols(1)
+
+# Return multiple colours in palette by number
+govuk_cols(1:3)
+govuk_cols(3:6)
+
+# Return colours by name
+govuk_cols("blue")
+govuk_cols(c("blue", "turquoise", "green", "light-green"))
 }

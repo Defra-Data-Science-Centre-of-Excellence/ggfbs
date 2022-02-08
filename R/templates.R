@@ -39,20 +39,48 @@ check_aesthetic <- function(aesthetic) {
 }
 
 # Chart Templates ----
-
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param data PARAM_DESCRIPTION
-#' @param aesthetic PARAM_DESCRIPTION
-#' @param error PARAM_DESCRIPTION, Default: NULL
-#' @param title PARAM_DESCRIPTION, Default: NULL
-#' @param value_name PARAM_DESCRIPTION, Default: NULL
-#' @param horizontal PARAM_DESCRIPTION, Default: FALSE
-#' @param label_bars PARAM_DESCRIPTION, Default: FALSE
-#' @param label_position PARAM_DESCRIPTION, Default: 'top'
-#' @param continuous_format PARAM_DESCRIPTION, Default: 'comma'
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' Plot Templates
+#'
+#' Set of functions containing templates for creating publication ready charts in Defra's
+#' Farm Business Survey style.
+#'
+#' @details
+#' This set of functions can be used in isolation to generate basic publication ready charts in the
+#' FBS style or can be combined with other ggplot2 layers for a deep level of customisation.
+#'
+#' For a list of accepted aesthetics for \code{fbs_barplot}, \code{fbs_stackplot} and
+#' \code{fbs_distribution_plot}, see \code{\link[ggplot2]{geom_bar}}.
+#'
+#' For a list of accepted aesthetics for \code{fbs_lineplot} see \code{\link[ggplot2]{geom_line}}.
+#'
+#' The following aesthetics are automatically scaled if supplied with their respective
+#' \code{scale_*_govuk} scale. All other aesthetics must be scaled manually with additional ggplot
+#' layers.
+#'
+#' \itemize{
+#'   \item \code{fill: \link{scale_fill_govuk}}
+#'   \item \code{colour: \link{scale_color_govuk}}
+#' }
+#'
+#' @param data Default dataset used for plot creation, passed into \code{\link[ggplot2]{ggplot}}.
+#' @param aesthetic Aesthetic mapping used for the plot created by \link[ggplot2]{aes}. See details
+#' for a list of accepted aesthetics for each template.
+#' @param error Column containing values to display as error bars within \code{fbs_barplot()}. Currently
+#' only supports symmetrical errors. Default: NULL
+#' @param title Character string of text used as the plot title. Default: NULL
+#' @param value_name Character string of text used to label the continuous axis, Default: NULL
+#' @param horizontal Set to \code{TRUE} to change the chart orientation to horizontal,
+#' Default: FALSE
+#' @param label_bars EXPERIMANTAL: Specify a column within the data to use a text label for each
+#' item. Default: NULL
+#' @param label_position EXPERIMANTAL: Position of text label.
+#' @param legend_hide Set to \code{TRUE} to hide the plot legend, Default: FALSE
+#' @param continuous_format Character string denoting the format that the continuous (y) axis should
+#' take.
+#'
+#' One of "identity", "comma", "percent", "abbreviated" or "scientific". Defaults to "percent" for
+#' \code{fbs_distribution_plot()} and "comma" for all other plots.
+#' @return Returns a ggplot object
 #' @examples
 #' \dontrun{
 #' if(interactive()){
@@ -60,12 +88,10 @@ check_aesthetic <- function(aesthetic) {
 #'  }
 #' }
 #' @seealso
-#' \code{\link[ggplot2]{geom_bar}},\code{\link[ggplot2]{aes}}
-#' @rdname fbs_barplot
+#' \code{\link[ggplot2]{ggplot}}, \code{\link[ggplot2]{aes}}, \code{\link[ggplot2]{geom_bar}},
+#' \code{\link[ggplot2]{geom_line}}
+#' @name fbs_templates
 #' @export
-#' @importFrom ggplot2 ggplot geom_bar position_dodge geom_hline geom_text aes geom_errorbar labs coord_flip scale_y_continuous expansion ylab scale_x_discrete
-#' @importFrom rlang as_name
-#' @importFrom scales pretty_breaks label_wrap
 fbs_barplot <- function(
   data,
   aesthetic,
@@ -170,28 +196,8 @@ fbs_barplot <- function(
   p
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param data PARAM_DESCRIPTION
-#' @param aesthetic PARAM_DESCRIPTION
-#' @param title PARAM_DESCRIPTION, Default: NULL
-#' @param value_name PARAM_DESCRIPTION, Default: NULL
-#' @param horizontal PARAM_DESCRIPTION, Default: FALSE
-#' @param continuous_format PARAM_DESCRIPTION, Default: 'comma'
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @seealso
-#' \code{\link[ggplot2]{geom_bar}},\code{\link[ggplot2]{aes}}
-#' @rdname fbs_stackplot
+#' @rdname fbs_templates
 #' @export
-#' @importFrom ggplot2 ggplot geom_line geom_hline labs scale_x_discrete scale_y_continuous
-#' @importFrom scales label_wrap pretty_breaks
 fbs_stackplot <- function(
   data,
   aesthetic,
@@ -262,25 +268,7 @@ fbs_stackplot <- function(
   p
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param data PARAM_DESCRIPTION
-#' @param aesthetic PARAM_DESCRIPTION
-#' @param title PARAM_DESCRIPTION, Default: NULL
-#' @param value_name PARAM_DESCRIPTION, Default: NULL
-#' @param horizontal PARAM_DESCRIPTION, Default: TRUE
-#' @param continuous_format PARAM_DESCRIPTION, Default: 'percent'
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @seealso
-#' \code{\link[ggplot2]{geom_bar}},\code{\link[ggplot2]{aes}}
-#' @rdname fbs_distribution_plot
+#' @rdname fbs_templates
 #' @export
 fbs_distribution_plot <- function(
   data,
@@ -349,28 +337,8 @@ fbs_distribution_plot <- function(
   p
 }
 
-#' @title FUNCTION_TITLE
-#' @description FUNCTION_DESCRIPTION
-#' @param data PARAM_DESCRIPTION
-#' @param aesthetic PARAM_DESCRIPTION
-#' @param title PARAM_DESCRIPTION, Default: NULL
-#' @param value_name PARAM_DESCRIPTION, Default: NULL
-#' @param include_legend PARAM_DESCRIPTION, Default: TRUE
-#' @param continuous_format PARAM_DESCRIPTION, Default: 'comma'
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples
-#' \dontrun{
-#' if(interactive()){
-#'  #EXAMPLE1
-#'  }
-#' }
-#' @seealso
-#' \code{\link[ggplot2]{geom_path}},\code{\link[ggplot2]{aes}}
-#' @rdname fbs_lineplot
+#' @rdname fbs_templates
 #' @export
-#' @importFrom ggplot2 ggplot geom_line geom_hline labs scale_x_discrete scale_y_continuous
-#' @importFrom scales label_wrap pretty_breaks
 fbs_lineplot <- function(
   data,
   aesthetic,
@@ -408,10 +376,13 @@ fbs_lineplot <- function(
   p <- p +
     scale_color_govuk()
 
-  # Add default styling
+  # Add default styling and additonal styling for line plot
   p <- p +
     theme_fbs() +
-    theme_fbs_line()
+    ggplot2::theme(
+      panel.grid.major.x = ggplot2::element_line(color = "#cbcbcb"),
+      axis.ticks.x = ggplot2::element_blank()
+    )
 
   # Hide legend if requested
   if (legend_hide) {
