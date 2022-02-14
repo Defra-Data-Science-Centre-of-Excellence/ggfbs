@@ -80,6 +80,8 @@ check_aesthetic <- function(aesthetic) {
 #'
 #' One of "identity", "comma", "percent", "abbreviated" or "scientific". Defaults to "percent" for
 #' \code{fbs_distribution_plot()} and "comma" for all other plots.
+#' @param font Change the default font.
+#' @param text_scale Scale up or down the text size within the plot.
 #' @return Returns a ggplot object
 #' @examples
 #' \dontrun{
@@ -102,7 +104,9 @@ fbs_barplot <- function(
   label_bars = FALSE,
   label_position = "top",
   legend_hide = FALSE,
-  continuous_format = "comma"
+  continuous_format = "comma",
+  font = "sans",
+  text_scale = 1
 ) {
 
   plot_type <- "bar"
@@ -177,15 +181,13 @@ fbs_barplot <- function(
       scale_fill_govuk()
   }
 
-  # Add default styling
+  # Add styling
   p <- p +
-    theme_fbs()
-
-  # Adjust for horizontal
-  if (horizontal) {
-    p <- p +
-      theme_fbs_h()
-  }
+    theme_fbs(
+      horizontal = horizontal,
+      text_scale = text_scale,
+      font = font
+    )
 
   # Hide legend if requested
   if (legend_hide) {
@@ -205,7 +207,9 @@ fbs_stackplot <- function(
   value_name = NULL,
   horizontal = FALSE,
   legend_hide = FALSE,
-  continuous_format = "comma"
+  continuous_format = "comma",
+  font = "sans",
+  text_scale = 1
 ) {
 
   plot_type <- "stackbar"
@@ -249,15 +253,13 @@ fbs_stackplot <- function(
   p <- p +
     scale_fill_govuk()
 
-  # Add default styling
+  # Add styling
   p <- p +
-    theme_fbs()
-
-  # Adjust for horizontal
-  if (horizontal) {
-    p <- p +
-      theme_fbs_h()
-  }
+    theme_fbs(
+      horizontal = horizontal,
+      text_scale = text_scale,
+      font = font
+    )
 
   # Hide legend if requested
   if (legend_hide) {
@@ -277,7 +279,9 @@ fbs_distribution_plot <- function(
   value_name = NULL,
   horizontal = FALSE,
   legend_hide = FALSE,
-  continuous_format = "percent"
+  continuous_format = "percent",
+  font = "sans",
+  text_scale = 1
 ) {
 
   plot_type <- "distbar"
@@ -318,15 +322,13 @@ fbs_distribution_plot <- function(
   p <- p +
     scale_fill_govuk()
 
-  # Add default styling
+  # Add styling
   p <- p +
-    theme_fbs()
-
-  # Adjust for horizontal
-  if (horizontal) {
-    p <- p +
-      theme_fbs_h()
-  }
+    theme_fbs(
+      horizontal = horizontal,
+      text_scale = text_scale,
+      font = font
+    )
 
   # Hide legend if requested
   if (legend_hide) {
@@ -345,7 +347,9 @@ fbs_lineplot <- function(
   title = NULL,
   value_name = NULL,
   legend_hide = FALSE,
-  continuous_format = "comma"
+  continuous_format = "comma",
+  font = "sans",
+  text_scale = 1
 ) {
 
   plot_type <- "line"
@@ -378,7 +382,11 @@ fbs_lineplot <- function(
 
   # Add default styling and additonal styling for line plot
   p <- p +
-    theme_fbs() +
+    theme_fbs(
+      horizontal = FALSE,
+      text_scale = text_scale,
+      font = font
+    ) +
     ggplot2::theme(
       panel.grid.major.x = ggplot2::element_line(color = "#cbcbcb"),
       axis.ticks.x = ggplot2::element_blank()

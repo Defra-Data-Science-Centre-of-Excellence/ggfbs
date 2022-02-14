@@ -9,6 +9,9 @@
 #' This function enables the application of the FBS theme to charts which do not have a set
 #' template. This can be combined with the scale_*_govuk set of functions to match the theming and
 #' colour scheme used within the templates.
+#' @param horizontal Set to \code{TRUE} to adjust the theme for horizontal plots.
+#' @param text_scale Scale up or down the text size within the plot.
+#' @param font Change the default font.
 #' @examples
 #' # Add the FBS theme to a basic boxplot
 #' ggplot(mpg, aes(class, hwy, colour = drv)) +
@@ -19,16 +22,17 @@
 #'  \code{\link[ggplot2]{theme}}
 #' @rdname theme_fbs
 #' @export
-theme_fbs <- function() {
-  font <- "sans"
+theme_fbs <- function(horizontal = FALSE,
+                      text_scale = 1,
+                      font = "sans") {
 
-  ggplot2::theme(
+  t <- ggplot2::theme(
 
     # Text format
     # Chart title
     plot.title = ggplot2::element_text(
       family = font,
-      size = 22,
+      size = 22 * text_scale,
       face = "bold",
       color = "#000000"
       # vjust = -8,
@@ -53,12 +57,12 @@ theme_fbs <- function() {
     legend.background = ggplot2::element_blank(),
     legend.title = ggplot2::element_blank(),
     legend.key = ggplot2::element_blank(),
-    legend.text = ggplot2::element_text(family = font, size = 20, color = "#000000"),
+    legend.text = ggplot2::element_text(family = font, size = 20 * text_scale, color = "#000000"),
 
     # Axis format
     # Text font, size and colour for the axis text, sets the margins and removes lines and ticks.
     axis.title = ggplot2::element_blank(),
-    axis.text = ggplot2::element_text(family = font, size = 18, color = "#000000"),
+    axis.text = ggplot2::element_text(family = font, size = 18 * text_scale, color = "#000000"),
     axis.text.x = ggplot2::element_text(margin = ggplot2::margin(5, b = 10)),
     axis.ticks = ggplot2::element_blank(),
     axis.line.x = ggplot2::element_blank(),
@@ -75,21 +79,24 @@ theme_fbs <- function() {
 
     # Strip background, sets the title size of the facet-wrap title to font size 22)
     strip.background = ggplot2::element_rect(fill = "white"),
-    strip.text = ggplot2::element_text(size = 22, hjust = 0)
+    strip.text = ggplot2::element_text(size = 22 * text_scale, hjust = 0)
   )
-}
 
-theme_fbs_h <- function() {
-  theme(
-    # Gridlines
-    panel.grid.major.x = ggplot2::element_line(color = "#cbcbcb"),
-    panel.grid.major.y = ggplot2::element_blank(),
+  if (horizontal) {
+    t <- t +
+      theme(
+        # Gridlines
+        panel.grid.major.x = ggplot2::element_line(color = "#cbcbcb"),
+        panel.grid.major.y = ggplot2::element_blank(),
 
-    # Axis lines
-    axis.line.y = ggplot2::element_blank(),
+        # Axis lines
+        axis.line.y = ggplot2::element_blank(),
 
-    # Axis text
-    axis.text.y = ggplot2::element_text(margin = ggplot2::margin(5, b = 10)),
-    axis.title.x = ggplot2::element_text(size = 20)
-  )
+        # Axis text
+        axis.text.y = ggplot2::element_text(margin = ggplot2::margin(5, b = 10)),
+        axis.title.x = ggplot2::element_text(size = 20)
+      )
+  }
+
+  t
 }

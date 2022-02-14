@@ -4,7 +4,14 @@
 \alias{theme_fbs}
 \title{Farm Business Survey Theme}
 \usage{
-theme_fbs()
+theme_fbs(horizontal = FALSE, text_scale = 1, font = "sans")
+}
+\arguments{
+\item{horizontal}{Set to \code{TRUE} to adjust the theme for horizontal plots.}
+
+\item{text_scale}{Scale up or down the text size within the plot.}
+
+\item{font}{Change the default font.}
 }
 \description{
 Apply the Farm Business Survey (FBS) theme to any plot

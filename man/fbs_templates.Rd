@@ -18,7 +18,9 @@ fbs_barplot(
   label_bars = FALSE,
   label_position = "top",
   legend_hide = FALSE,
-  continuous_format = "comma"
+  continuous_format = "comma",
+  font = "sans",
+  text_scale = 1
 )
 
 fbs_stackplot(
@@ -28,7 +30,9 @@ fbs_stackplot(
   value_name = NULL,
   horizontal = FALSE,
   legend_hide = FALSE,
-  continuous_format = "comma"
+  continuous_format = "comma",
+  font = "sans",
+  text_scale = 1
 )
 
 fbs_distribution_plot(
@@ -38,7 +42,9 @@ fbs_distribution_plot(
   value_name = NULL,
   horizontal = FALSE,
   legend_hide = FALSE,
-  continuous_format = "percent"
+  continuous_format = "percent",
+  font = "sans",
+  text_scale = 1
 )
 
 fbs_lineplot(
@@ -47,7 +53,9 @@ fbs_lineplot(
   title = NULL,
   value_name = NULL,
   legend_hide = FALSE,
-  continuous_format = "comma"
+  continuous_format = "comma",
+  font = "sans",
+  text_scale = 1
 )
 }
 \arguments{
@@ -78,6 +86,10 @@ take.
 
 One of "identity", "comma", "percent", "abbreviated" or "scientific". Defaults to "percent" for
 \code{fbs_distribution_plot()} and "comma" for all other plots.}
+
+\item{font}{Change the default font.}
+
+\item{text_scale}{Scale up or down the text size within the plot.}
 }
 \value{
 Returns a ggplot object
