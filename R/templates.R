@@ -71,9 +71,6 @@ check_aesthetic <- function(aesthetic) {
 #' @param value_name Character string of text used to label the continuous axis, Default: NULL
 #' @param horizontal Set to \code{TRUE} to change the chart orientation to horizontal,
 #' Default: FALSE
-#' @param label_bars EXPERIMANTAL: Specify a column within the data to use a text label for each
-#' item. Default: NULL
-#' @param label_position EXPERIMANTAL: Position of text label.
 #' @param legend_hide Set to \code{TRUE} to hide the plot legend, Default: FALSE
 #' @param continuous_format Character string denoting the format that the continuous (y) axis should
 #' take.
@@ -101,8 +98,6 @@ fbs_barplot <- function(
   title = NULL,
   value_name = NULL,
   horizontal = FALSE,
-  label_bars = FALSE,
-  label_position = "top",
   legend_hide = FALSE,
   continuous_format = "comma",
   font = "sans",
@@ -121,20 +116,6 @@ fbs_barplot <- function(
     geom_fbsbar() +
     # Add line at 0
     ggplot2::geom_hline(yintercept = 0)
-
-  if (label_bars) {
-    max_value <- max(to_plot[[values]])
-
-    p <- p + ggplot2::geom_text(
-      ggplot2::aes(
-        label = .data[[values]],
-        x = .data[[categories]],
-        y = .data[[values]] + set_label_position(max_value)
-      ),
-      position = ggplot2::position_dodge(0.9),
-      vjust = 0
-    )
-  }
 
   # Add error bars if needed
   if (!is.null(error)) {

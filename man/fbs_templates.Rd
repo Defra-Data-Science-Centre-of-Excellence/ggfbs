@@ -15,8 +15,6 @@ fbs_barplot(
   title = NULL,
   value_name = NULL,
   horizontal = FALSE,
-  label_bars = FALSE,
-  label_position = "top",
   legend_hide = FALSE,
   continuous_format = "comma",
   font = "sans",
@@ -73,11 +71,6 @@ only supports symmetrical errors. Default: NULL}
 
 \item{horizontal}{Set to \code{TRUE} to change the chart orientation to horizontal,
 Default: FALSE}
-
-\item{label_bars}{EXPERIMANTAL: Specify a column within the data to use a text label for each
-item. Default: NULL}
-
-\item{label_position}{EXPERIMANTAL: Position of text label.}
 
 \item{legend_hide}{Set to \code{TRUE} to hide the plot legend, Default: FALSE}
 
