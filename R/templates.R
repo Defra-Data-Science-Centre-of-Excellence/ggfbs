@@ -65,8 +65,13 @@ check_aesthetic <- function(aesthetic) {
 #' @param data Default dataset used for plot creation, passed into \code{\link[ggplot2]{ggplot}}.
 #' @param aesthetic Aesthetic mapping used for the plot created by \link[ggplot2]{aes}. See details
 #' for a list of accepted aesthetics for each template.
-#' @param error Column containing values to display as error bars within \code{fbs_barplot()}. Currently
-#' only supports symmetrical errors. Default: NULL
+#' @param error Set the columns within the data to generate error bars from within
+#' \code{fbs_barplot()}
+#'
+#' Either a single character corresponding to errors in the plus/minus format or a character vector
+#' of length two to set the minimum and maximum values separately where the first character
+#' corresponds to the minimum value and second character to the maximum value e.g.
+#' \code{c("min_value", "max_value")}
 #' @param title Character string of text used as the plot title. Default: NULL
 #' @param value_name Character string of text used to label the continuous axis, Default: NULL
 #' @param horizontal Set to \code{TRUE} to change the chart orientation to horizontal,
@@ -119,12 +124,24 @@ fbs_barplot <- function(
 
   # Add error bars if needed
   if (!is.null(error)) {
+    # Create aesthetic for error
+    if (length(error) == 1) {
+      # Create aesthetic for symmetrical errors
+      aes_error <- ggplot2::aes(
+        ymin = .data[[rlang::as_name(aesthetic[["y"]])]] - .data[[error]],
+        ymax = .data[[rlang::as_name(aesthetic[["y"]])]] + .data[[error]]
+      )
+    } else if (length(error) == 2) {
+      # Create aesthetic for asymmetrical errors
+      aes_error <- ggplot2::aes(ymin = .data[[error[1]]], ymax = .data[[error[2]]])
+    } else {
+      stop(
+        "`error` must either be a single character or character vector of length 2"
+      )
+    }
     p <- p +
       ggplot2::geom_errorbar(
-        ggplot2::aes(
-          ymax = .data[[rlang::as_name(aesthetic[["y"]])]] + .data[[error]],
-          ymin = .data[[rlang::as_name(aesthetic[["y"]])]] - .data[[error]]
-        ),
+        aes_error,
         width = 0.2,
         position = ggplot2::position_dodge(0.75),
         size = 0.1,

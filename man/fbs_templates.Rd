@@ -62,8 +62,13 @@ fbs_lineplot(
 \item{aesthetic}{Aesthetic mapping used for the plot created by \link[ggplot2]{aes}. See details
 for a list of accepted aesthetics for each template.}
 
-\item{error}{Column containing values to display as error bars within \code{fbs_barplot()}. Currently
-only supports symmetrical errors. Default: NULL}
+\item{error}{Set the columns within the data to generate error bars from within
+\code{fbs_barplot()}
+
+Either a single character corresponding to errors in the plus/minus format or a character vector
+of length two to set the minimum and maximum values separately where the first character
+corresponds to the minimum value and second character to the maximum value e.g.
+\code{c("min_value", "max_value")}}
 
 \item{title}{Character string of text used as the plot title. Default: NULL}
 
