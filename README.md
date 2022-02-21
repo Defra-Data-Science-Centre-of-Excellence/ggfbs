@@ -2,6 +2,13 @@
 
 ggfbs is a package containing convenient functions to create publication ready charts with Defra's Farm Business Survey (FBS) style. This package was built with and designed to work in conjunction with [ggplot2](https://ggplot2.tidyverse.org/) and provides a set of templates to create basic chart whilst also allowing a deep level of customisation.
 
+### Other FBS tools
+
+Along with ggfbs, the FBS team has developed several tools for working with FBS data and to aid in the implemtations of Reproducible Analytical Pipelines (RAP).
+
+* [rgovspeak](https://github.com/Defra-Data-Science-Centre-of-Excellence/rgovspeak): Adds govspeak markdown template to rmarkdown and provide html render functionality to preview your page as if it were published on gov.uk.  
+* [FBSCore](https://github.com/Defra-Data-Science-Centre-of-Excellence/FBSCore ): Core functions for extracting and working with FBS data. A full package reference is also available [here](http://fbs.int.sce.network/shiny/fbscore/).
+
 ## Installation
 
 If you have a http proxy setup and have created a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token), install the package through R, replacing `my_token` with your personal access token.
