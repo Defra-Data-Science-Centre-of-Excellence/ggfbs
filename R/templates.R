@@ -283,6 +283,7 @@ fbs_distribution_plot <- function(
 ) {
 
   plot_type <- "distbar"
+  aes_spec <- check_aesthetic(aesthetic)
 
   to_plot <- data
 
@@ -293,6 +294,12 @@ fbs_distribution_plot <- function(
     ggplot2::geom_bar(stat = "identity", position = ggplot2::position_fill(), width = 0.75) +
     # Add line at 0
     ggplot2::geom_hline(yintercept = 0)
+
+  # Add label geom if supplied in aesthetic
+  if (aes_spec$label) {
+    p <- p +
+      geom_text(position = position_fill(0.5), size = 7)
+  }
 
   # Add labels
   p <- p +

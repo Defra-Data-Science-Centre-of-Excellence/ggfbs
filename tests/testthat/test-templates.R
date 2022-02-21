@@ -97,7 +97,7 @@ test_that("6. fbs_barplot generates plot with symmetrical error bars", {
   expect_silent(print(p))
 })
 
-test_that("7 .fbs_barplot generates plot with asymmetrical error bars", {
+test_that("7. fbs_barplot generates plot with asymmetrical error bars", {
 
   plot_data <- data.frame(
     x = c("a", "b", "c"),
@@ -108,6 +108,25 @@ test_that("7 .fbs_barplot generates plot with asymmetrical error bars", {
 
   p <- plot_data %>%
     fbs_barplot(ggplot2::aes(x = x, y = y), error = c("error_min", "error_max"))
+
+  expect_true(ggplot2::is.ggplot(p))
+  expect_silent(print(p))
+})
+
+test_that("8. fbs_distribution_plot generates plot with labels", {
+
+  plot_data <- data.frame(
+    x = c("a", "a", "a",
+          "b", "b", "b",
+          "c", "c", "c"),
+    y = c(0.2, 0.6, 0.2,
+          0.5, 0.2, 0.3,
+          0.1, 0.9, 0),
+    f = c("x", "y", "z")
+  )
+
+  p <- plot_data %>%
+    fbs_distribution_plot(ggplot2::aes(x = x, y = y, fill = f, label = y))
 
   expect_true(ggplot2::is.ggplot(p))
   expect_silent(print(p))
