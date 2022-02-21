@@ -81,6 +81,12 @@ govuk_cols <- function(...) {
 #' @export
 govuk_pal <- function() {
   function(n) {
+    col_len <- length(govuk_cols())
+    if (n > col_len) {
+      warning(
+        paste0("Number of breaks (", n, ") exceeds colours in palette (", col_len, ")")
+        )
+    }
     unname(govuk_cols(1:n))
   }
 }
