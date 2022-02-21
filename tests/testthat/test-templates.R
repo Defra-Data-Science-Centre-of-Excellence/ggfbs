@@ -1,6 +1,7 @@
 test_data <- read.csv("test-input/barplot-data.csv")
 
-test_that("1. fbs_barplot generates base plot with no errors", {
+# 1. fbs_barplot ----
+test_that("1.1 fbs_barplot generates base plot with no errors", {
 
   plot_data <- data.frame(
     x = c("a", "b", "c"),
@@ -14,7 +15,7 @@ test_that("1. fbs_barplot generates base plot with no errors", {
     expect_silent(print(p))
 })
 
-test_that("2. fbs_barplot generates grouped plot with no errors", {
+test_that("1.2 fbs_barplot generates grouped plot with no errors", {
 
   plot_data <- data.frame(
     x = c("a", "b", "c", "a", "b", "c"),
@@ -29,7 +30,39 @@ test_that("2. fbs_barplot generates grouped plot with no errors", {
   expect_silent(print(p))
 })
 
-test_that("3. fbs_stackplot generates base plot with no errors", {
+test_that("1.3 fbs_barplot generates plot with symmetrical error bars", {
+
+  plot_data <- data.frame(
+    x = c("a", "b", "c"),
+    y = c(10000, 5000, 7000),
+    error = c(2000, 500, 6000)
+  )
+
+  p <- plot_data %>%
+    fbs_barplot(ggplot2::aes(x = x, y = y), error = "error")
+
+  expect_true(ggplot2::is.ggplot(p))
+  expect_silent(print(p))
+})
+
+test_that("1.4 fbs_barplot generates plot with asymmetrical error bars", {
+
+  plot_data <- data.frame(
+    x = c("a", "b", "c"),
+    y = c(10000, 5000, 7000),
+    error_min = c(2000, 500, 6000),
+    error_max = c(11000, 7000, 13000)
+  )
+
+  p <- plot_data %>%
+    fbs_barplot(ggplot2::aes(x = x, y = y), error = c("error_min", "error_max"))
+
+  expect_true(ggplot2::is.ggplot(p))
+  expect_silent(print(p))
+})
+
+# 2. fbs_stackplot ----
+test_that("2.1 fbs_stackplot generates base plot with no errors", {
 
   plot_data <- data.frame(
     x = c("a", "b", "c", "a", "b", "c"),
@@ -44,7 +77,8 @@ test_that("3. fbs_stackplot generates base plot with no errors", {
   expect_silent(print(p))
 })
 
-test_that("4. fbs_distribution_plot generates base plot with no error", {
+# 3. fbs_distribution_plot ----
+test_that("3.1 fbs_distribution_plot generates base plot with no error", {
 
   plot_data <- data.frame(
     x = c("a", "a", "a",
@@ -63,57 +97,7 @@ test_that("4. fbs_distribution_plot generates base plot with no error", {
   expect_silent(print(p))
 })
 
-test_that("5. fbs_lineplot generates base plot with no error", {
-
-  plot_data <- data.frame(
-    x = c("2010",
-          "2011",
-          "2012"),
-    y = c(20000,
-          17000,
-          21000)
-  )
-
- p <-  plot_data %>%
-    fbs_lineplot(ggplot2::aes(x = x, y = y, group = 1))
-
-  expect_true(ggplot2::is.ggplot(p))
-  expect_silent(print(p))
-
-})
-
-test_that("6. fbs_barplot generates plot with symmetrical error bars", {
-
-  plot_data <- data.frame(
-    x = c("a", "b", "c"),
-    y = c(10000, 5000, 7000),
-    error = c(2000, 500, 6000)
-  )
-
-  p <- plot_data %>%
-    fbs_barplot(ggplot2::aes(x = x, y = y), error = "error")
-
-  expect_true(ggplot2::is.ggplot(p))
-  expect_silent(print(p))
-})
-
-test_that("7. fbs_barplot generates plot with asymmetrical error bars", {
-
-  plot_data <- data.frame(
-    x = c("a", "b", "c"),
-    y = c(10000, 5000, 7000),
-    error_min = c(2000, 500, 6000),
-    error_max = c(11000, 7000, 13000)
-  )
-
-  p <- plot_data %>%
-    fbs_barplot(ggplot2::aes(x = x, y = y), error = c("error_min", "error_max"))
-
-  expect_true(ggplot2::is.ggplot(p))
-  expect_silent(print(p))
-})
-
-test_that("8. fbs_distribution_plot generates plot with labels", {
+test_that("3.2 fbs_distribution_plot generates plot with labels", {
 
   plot_data <- data.frame(
     x = c("a", "a", "a",
@@ -130,4 +114,24 @@ test_that("8. fbs_distribution_plot generates plot with labels", {
 
   expect_true(ggplot2::is.ggplot(p))
   expect_silent(print(p))
+})
+
+# 4. fbs_lineplot ----
+test_that("4.1 fbs_lineplot generates base plot with no error", {
+
+  plot_data <- data.frame(
+    x = c("2010",
+          "2011",
+          "2012"),
+    y = c(20000,
+          17000,
+          21000)
+  )
+
+ p <-  plot_data %>%
+    fbs_lineplot(ggplot2::aes(x = x, y = y, group = 1))
+
+  expect_true(ggplot2::is.ggplot(p))
+  expect_silent(print(p))
+
 })

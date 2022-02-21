@@ -385,7 +385,7 @@ fbs_lineplot <- function(
   p <- p +
     scale_colour_govuk()
 
-  # Add default styling and additonal styling for line plot
+  # Add default styling and additional styling for line plot
   p <- p +
     theme_fbs(
       horizontal = FALSE,
