@@ -1,12 +1,12 @@
 Package: ggfbs
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Data visualisations used by the FBS team
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: 
+    person("Cristobal", "Rengifo Castillo", role = c("aut", "cre"), email = "cristobal.rengifo-castillo@defra.gov.uk")
+Description: Chart templates and utilities used by the Farm Business Survey (FBS) 
+             team for publishing on gov.uk
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
@@ -17,4 +17,3 @@ Imports:
 Suggests: 
     testthat (>= 3.0.0)
 RoxygenNote: 7.1.1
-
