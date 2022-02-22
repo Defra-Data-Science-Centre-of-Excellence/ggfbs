@@ -1,4 +1,12 @@
-## ggfbs
+---
+title: "ggfbs"
+output: html_document
+---
+<hr>
+```{R setup, include=FALSE}
+library(tidyverse)
+library(ggfbs)
+```
 
 ggfbs is a package containing convenient functions to create publication ready charts with Defra's Farm Business Survey (FBS) style. This package was built with and designed to work in conjunction with [ggplot2](https://ggplot2.tidyverse.org/) and provides a set of templates to create basic chart whilst also allowing a deep level of customisation.
 
@@ -10,7 +18,7 @@ Along with ggfbs, the FBS team has developed several tools for working with FBS 
 * [FBSCore](https://github.com/Defra-Data-Science-Centre-of-Excellence/FBSCore ): Core functions for extracting and working with FBS data. A full package reference is also available [here](http://fbs.int.sce.network/shiny/fbscore/).
 
 ## Installation
-
+<hr>
 If you have a http proxy setup and have created a [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token), install the package through R, replacing `my_token` with your personal access token.
 
 ```r
@@ -24,7 +32,7 @@ install.packages("~/Downloads/ggfbs.zip", repos=NULL)
 ```
 
 ## Usage
-
+<hr>
 There are three main ways this package may be used:
 
 1. Utilise the in built templates to create basic charts.
@@ -33,14 +41,16 @@ There are three main ways this package may be used:
 
 ### Basic Chart Templates
 
-```r
+```{r, fig.width=960/72, fig.height=640/72, dpi=72}
 # Load libraries
 library(dplyr)
 library(ggplot2)
 library(ggfbs)
 
 # Read in some data
-fbi_data <- read.csv("fbi-data.csv", row.names = FALSE)
+fbi_data <- read.csv(
+  "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1031993/fbs-farmbusinessincome-series_9nov21.csv"
+)
 
 # Manipulate dataset
 plot_data <- fbi_data %>% 
@@ -50,7 +60,6 @@ plot_data <- fbi_data %>%
 plot_data %>% 
   fbs_barplot(aes(x = factor_name, y = mean, fill = fbsyear))
 ```
-![](examples/usage-barplot-1.png)<!-- -->
 
 ### Customise with ggplot2
 
@@ -58,7 +67,18 @@ ggfbs allows extensive customisation by adding additional ggplot2 layers to your
 
 Firstly, we will create a basic time series comparing the Farm Business Income of Cereal farms with the overall average.
 
-```r
+```{r, fig.width=960/72, fig.height=640/72, dpi=72}
+# Manipulate dataset
+years_include <- purrr::map_chr(2010:2020, ~ paste0(.x,"/", as.numeric(substr(.x, 3, 4)) + 1))
+
+plot_data <- fbi_data %>% 
+  filter(
+    variable == "Farm Business Income", 
+    fbsyear %in% years_include, 
+    factor_name %in% c("Cereals", "All farms")
+  ) %>% 
+  mutate(factor_name = forcats::fct_rev(factor_name))
+
 p <- plot_data %>% 
   fbs_lineplot(
     aes(x = fbsyear, y = mean, group = interaction(factor_name, typology), 
@@ -68,26 +88,24 @@ p <- plot_data %>%
   
 p
 ```
-![](examples/usage-lineplot-1.png)<!-- -->
 
 Now that we have the basic line plot, we can see that we have two series breaks. Here it might be useful to add two vertical lines to highlight these breaks.
 
 We can also change the types of lines displayed by added a scale.
 
-```r
+```{r, fig.width=960/72, fig.height=640/72, dpi=72}
 p2 <- p +
   geom_vline(xintercept = c("2012/13", "2017/18"), colour = "#333333")  +
   scale_linetype_manual(values = c("solid", "longdash"))
   
 p2
 ```
-![](examples/usage-lineplot-2.png)<!-- -->
 
 When creating a line chart, it is sometimes preferable to omit the legend and instead label the lines directly.
 
 Here we set the `legend_hide` argument to `TRUE` within `fbs_lineplot()` and create two annotation layers, allowing us to finely control the position and size of the label. Additionally, to ensure consistency with our theme, we use the `govuk_cols()` helper function to match the colours of the text to those of the lines.
 
-```r
+```{r, fig.width=960/72, fig.height=640/72, dpi=72}
 p3 <- plot_data %>% 
   fbs_lineplot(
     aes(x = fbsyear, y = mean, group = interaction(factor_name, typology), 
@@ -96,7 +114,7 @@ p3 <- plot_data %>%
     legend_hide = TRUE
   ) +
   geom_vline(xintercept = c("2012/13", "2017/18"), colour = "#4d4d4d") +
-  scale_linetype_manual(values = c("solid", "longdash"))
+  scale_linetype_manual(values = c("solid", "longdash")) +
   annotate(
     "text", 
     x = 10,
@@ -115,26 +133,24 @@ p3 <- plot_data %>%
 
 p3
 ```
-![](examples/usage-lineplot-3.png)<!-- -->
 
 ### Apply styling to your own charts
 
 Alternatively, to apply the FBS theming to chart types not included in the templates, apply `theme_fbs()` in conjunction with one of the govuk scales.
 
-```r
+```{r, fig.width=960/72, fig.height=640/72, dpi=72}
 p4 <- ggplot(mpg, aes(class, hwy, colour = drv)) + 
   geom_boxplot(size = 1.2) +
-  scale_color_govuk() +
+  scale_colour_govuk() +
   scale_y_continuous(breaks = scales::pretty_breaks(6)) +
   theme_fbs()
 
 p4
 ```
-![](examples/usage-boxplot-1.png)<!-- -->
 
 ## Export Chart
-
-by default the theme applied to the charts within this package is optimised for publication on gov.uk. For the charts to output correctly the size and dpi of the charts must be set to:
+<hr>
+by default, the theme applied to the charts within this package is optimised for publication on gov.uk. For the charts to output correctly the size and dpi of the charts must be set to:
 
 - wdith: 960
 - height: 640
@@ -156,7 +172,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-### 2. Save your chart
+### 2. Save your chart:
 
 Use the `ggsave()` function as below to save your plot.
 
@@ -172,6 +188,7 @@ ggsave("bar-plot.png", p, width = 960/72, height = 640/72, dpi = 72)
 All templates allow you to scale the size of the text up or down through the `text_scale` argument. e.g. setting `text_scale` to `0.5` reduced the size of the text by 50%. These charts can then be exported through any of the usual methods.
 
 ## Help and Resources
+<hr>
 Data visualisation and ggplot2
 
 https://ggplot2.tidyverse.org/index.html  
@@ -181,3 +198,4 @@ Coding in R and programming with ggplot2
 
 https://r4ds.had.co.nz/  
 https://ggplot2-book.org/index.html
+
