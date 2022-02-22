@@ -1,3 +1,4 @@
+# Colours in the govuk palette and the order they are called
 govuk_colours <- c(
   "blue" = "#1d70b8",
   "turquoise" = "#28a197",
@@ -10,6 +11,8 @@ govuk_colours <- c(
   "black" = "#0b0c0c"
 )
 
+# Default colour to use if no govuk scale need be applied.
+# Currently the first colour in govuk_colours(): "blue" = "#1d70b8"
 default_colour <- govuk_colours[[1]]
 
 #' gov.uk Colours

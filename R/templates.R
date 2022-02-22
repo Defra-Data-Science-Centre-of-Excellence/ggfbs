@@ -1,3 +1,7 @@
+# Unused function
+# Previously called within fbs_barplot() to generate error bars
+# This functionality now sits wholly within fbs_barplot()
+# If error bar implementation becomes too length it can be separated again in the future
 add_error_bars <- function(data, values, ci) {
   ggplot2::geom_errorbar(
     ggplot2::aes(ymax = mean + confidence_interval, ymin = mean - confidence_interval),
@@ -6,11 +10,15 @@ add_error_bars <- function(data, values, ci) {
   )
 }
 
+# Unused function
+# Previously called within fbs_barplot() as part of label implementation
+# This is now down for the user to add after fbs_barplot() has been called
 set_label_position <- function(max_value, position_scaler = 0.025) {
   pos <- position_scaler * 10 ^ floor(log(max_value, 10))
   pos
 }
 
+# Helper function for the `continuous_format` argument
 format_label_continuous <- function(label_format, ...) {
   switch(label_format,
     "identity" = scales::label_number(...),
@@ -22,7 +30,7 @@ format_label_continuous <- function(label_format, ...) {
   )
 }
 
-
+# Check the aesthetic passed into the template to allow custom visualisations to be applied
 check_aesthetic <- function(aesthetic) {
   aesthetic_names <- names(aesthetic)
   list(
@@ -123,21 +131,22 @@ fbs_barplot <- function(
 
   # Add error bars if needed
   if (!is.null(error)) {
-    # Create aesthetic for error
+    # Check length of `error` argument passed
     if (length(error) == 1) {
-      # Create aesthetic for symmetrical errors
+      # Create aesthetic for symmetrical errors with one column within the data
       aes_error <- ggplot2::aes(
         ymin = .data[[rlang::as_name(aesthetic[["y"]])]] - .data[[error]],
         ymax = .data[[rlang::as_name(aesthetic[["y"]])]] + .data[[error]]
       )
     } else if (length(error) == 2) {
-      # Create aesthetic for asymmetrical errors
+      # Create aesthetic for errors with two columns with the data
       aes_error <- ggplot2::aes(ymin = .data[[error[1]]], ymax = .data[[error[2]]])
     } else {
       stop(
         "`error` must either be a single character or character vector of length 2"
       )
     }
+    # Add error bars to plot
     p <- p +
       ggplot2::geom_errorbar(
         aes_error,
@@ -152,7 +161,7 @@ fbs_barplot <- function(
   p <- p +
     ggplot2::labs(title = title)
 
-  # Add scales
+  # Check plot orientation and add scales
   if (horizontal) {
     p <- p +
       ggplot2::coord_flip() +
@@ -178,7 +187,7 @@ fbs_barplot <- function(
       scale_fill_govuk()
   }
 
-  # Add styling
+  # Add theme
   p <- p +
     theme_fbs(
       horizontal = horizontal,
@@ -223,7 +232,7 @@ fbs_stackplot <- function(
   p <- p +
     ggplot2::labs(title = title)
 
-  # Add scales
+  # Check plot orientation and add scales
   if (horizontal) {
     p <- p +
       ggplot2::coord_flip() +
@@ -248,7 +257,7 @@ fbs_stackplot <- function(
   p <- p +
     scale_fill_govuk()
 
-  # Add styling
+  # Add theme
   p <- p +
     theme_fbs(
       horizontal = horizontal,
@@ -302,7 +311,7 @@ fbs_distribution_plot <- function(
     ggplot2::labs(title = title) +
     ggplot2::ylab(label = value_name)
 
-  # Add scales
+  # Check plot orientation and add scales
   if (horizontal) {
     p <- p +
       ggplot2::coord_flip() +
@@ -323,7 +332,7 @@ fbs_distribution_plot <- function(
   p <- p +
     scale_fill_govuk()
 
-  # Add styling
+  # Add theme
   p <- p +
     theme_fbs(
       horizontal = horizontal,
@@ -374,7 +383,6 @@ fbs_lineplot <- function(
       breaks = scales::pretty_breaks(6),
       labels = format_label_continuous(continuous_format)
     )
-
 
   p <- p +
     scale_colour_govuk()
