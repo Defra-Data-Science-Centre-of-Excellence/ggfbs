@@ -109,7 +109,6 @@ fbs_barplot <- function(
   text_scale = 1
 ) {
 
-  plot_type <- "bar"
   aes_spec <- check_aesthetic(aesthetic)
 
   to_plot <- data
@@ -210,8 +209,6 @@ fbs_stackplot <- function(
   text_scale = 1
 ) {
 
-  plot_type <- "stackbar"
-
   to_plot <- data
 
   # Primary geom
@@ -282,7 +279,6 @@ fbs_distribution_plot <- function(
   text_scale = 1
 ) {
 
-  plot_type <- "distbar"
   aes_spec <- check_aesthetic(aesthetic)
 
   to_plot <- data
@@ -356,8 +352,6 @@ fbs_lineplot <- function(
   font = "sans",
   text_scale = 1
 ) {
-
-  plot_type <- "line"
 
   to_plot <- data
 
