@@ -96,22 +96,23 @@ p3 <- plot_data %>%
     legend_hide = TRUE
   ) +
   geom_vline(xintercept = c("2012/13", "2017/18"), colour = "#4d4d4d") +
-  scale_linetype_manual(values = c("solid", "longdash"))
+  scale_linetype_manual(values = c("solid", "longdash")) +
   annotate(
     "text", 
-    x = 10,
+    x = 11,
     y = 75000,
     label = "Cereals",
     size = 8,
-    colour = ggfbs:::govuk_cols(1)
+    colour = govuk_cols(1)
   ) +
   annotate(
     "text",
-    x = 10,
+    x = 11,
     y = 45000,
     label = "All Farms",
     size = 8,
-    colour = ggfbs:::govuk_cols(2))
+    colour = govuk_cols(2)
+    )
 
 p3
 ```

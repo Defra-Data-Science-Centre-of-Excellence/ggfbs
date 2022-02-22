@@ -117,19 +117,20 @@ p3 <- plot_data %>%
   scale_linetype_manual(values = c("solid", "longdash")) +
   annotate(
     "text", 
-    x = 10,
+    x = 11,
     y = 75000,
     label = "Cereals",
     size = 8,
-    colour = ggfbs:::govuk_cols(1)
+    colour = govuk_cols(1)
   ) +
   annotate(
     "text",
-    x = 10,
+    x = 11,
     y = 45000,
     label = "All Farms",
     size = 8,
-    colour = ggfbs:::govuk_cols(2))
+    colour = govuk_cols(2)
+    )
 
 p3
 ```
