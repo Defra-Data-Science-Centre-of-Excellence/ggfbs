@@ -303,7 +303,7 @@ fbs_distribution_plot <- function(
   # Add label geom if supplied in aesthetic
   if (aes_spec$label) {
     p <- p +
-      geom_text(position = position_fill(0.5), size = 7)
+      ggplot2::geom_text(position = ggplot2::position_fill(0.5), size = 7)
   }
 
   # Add labels
