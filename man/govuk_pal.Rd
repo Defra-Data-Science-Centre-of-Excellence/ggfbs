@@ -15,7 +15,7 @@ Palette function similar to those found within the scales package.
 }
 \details{
 Calling the govuk_pal will return the palette function passed into
-\code{\link{scale_colour_govuk}} and \code{\link{scale_fill_govuk.}}.
+\code{\link{scale_colour_govuk}} and \code{\link[=scale_colour_govuk]{scale_fill_govuk}}.
 
 This function can also be used to return a character vector containing \code{x} number of
 colours with the syntax \code{govuk_pal()(x)}. For example, \code{govuk_pal()(5)} will return a

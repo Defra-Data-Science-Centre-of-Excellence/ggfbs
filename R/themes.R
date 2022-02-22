@@ -13,11 +13,13 @@
 #' @param text_scale Scale up or down the text size within the plot.
 #' @param font Change the default font.
 #' @examples
+#' \dontrun{
 #' # Add the FBS theme to a basic boxplot
 #' ggplot(mpg, aes(class, hwy, colour = drv)) +
 #'   geom_boxplot(size = 1.2) +
 #'   scale_colour_govuk() +
 #'   theme_fbs()
+#' }
 #' @seealso
 #'  \code{\link[ggplot2]{theme}}
 #' @rdname theme_fbs

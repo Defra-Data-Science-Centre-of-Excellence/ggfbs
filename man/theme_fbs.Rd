@@ -25,11 +25,13 @@ template. This can be combined with the scale_*_govuk set of functions to match 
 colour scheme used within the templates.
 }
 \examples{
+\dontrun{
 # Add the FBS theme to a basic boxplot
 ggplot(mpg, aes(class, hwy, colour = drv)) +
   geom_boxplot(size = 1.2) +
   scale_colour_govuk() +
   theme_fbs()
+}
 }
 \seealso{
 \code{\link[ggplot2]{theme}}

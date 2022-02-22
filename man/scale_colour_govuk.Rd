@@ -24,11 +24,13 @@ These scales can additionally be added to non-template charts to provide the col
 within the templates.
 }
 \examples{
+\dontrun{
 # Add the FBS theme to a basic boxplot
 ggplot(mpg, aes(class, hwy, colour = drv)) +
   geom_boxplot(size = 1.2) +
   scale_colour_govuk() +
   theme_fbs()
+}
 }
 \seealso{
 \code{\link[ggplot2]{discrete_scale}}
