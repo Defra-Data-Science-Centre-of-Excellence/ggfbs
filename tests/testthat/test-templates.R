@@ -135,3 +135,22 @@ test_that("4.1 fbs_lineplot generates base plot with no error", {
   expect_silent(print(p))
 
 })
+
+test_that("4.2 fbs_lineplot generates base plot when x is continuous", {
+
+  plot_data <- data.frame(
+    x = c(200,
+          300,
+          600),
+    y = c(20000,
+          17000,
+          21000)
+  )
+
+  p <- plot_data %>%
+    fbs_lineplot(ggplot2::aes(x = x, y = y))
+
+  expect_true(ggplot2::is.ggplot(p))
+  expect_silent(print(p))
+
+})
