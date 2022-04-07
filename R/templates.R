@@ -377,12 +377,17 @@ fbs_lineplot <- function(
     ggplot2::labs(title = title, subtitle = value_name)
 
   # Add scales
-  p <- p +
-    ggplot2::scale_x_discrete(labels = scales::label_wrap(10)) +
-    ggplot2::scale_y_continuous(
-      breaks = scales::pretty_breaks(6),
-      labels = format_label_continuous(continuous_format)
-    )
+  if (is.double(to_plot[[rlang::as_name(aesthetic[["x"]])]])) {
+    p <- p +
+      ggplot2::scale_x_continuous()
+  } else {
+    p <- p +
+      ggplot2::scale_x_discrete(labels = scales::label_wrap(10)) +
+      ggplot2::scale_y_continuous(
+        breaks = scales::pretty_breaks(6),
+        labels = format_label_continuous(continuous_format)
+      )
+  }
 
   p <- p +
     scale_colour_govuk()
