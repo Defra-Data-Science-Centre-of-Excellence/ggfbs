@@ -1,5 +1,3 @@
-test_data <- read.csv("test-input/barplot-data.csv")
-
 # 1. fbs_barplot ----
 test_that("1.1 fbs_barplot generates base plot with no errors", {
 
