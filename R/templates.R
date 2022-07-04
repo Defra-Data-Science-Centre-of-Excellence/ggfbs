@@ -358,7 +358,7 @@ fbs_lineplot <- function(
   value_name = NULL,
   legend_hide = FALSE,
   continuous_format = "comma",
-  zero_axis = TRUE,
+  zero_axis = FALSE,
   font = "sans",
   text_scale = 1
 ) {
