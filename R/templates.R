@@ -358,6 +358,7 @@ fbs_lineplot <- function(
   value_name = NULL,
   legend_hide = FALSE,
   continuous_format = "comma",
+  zero_axis = FALSE,
   font = "sans",
   text_scale = 1
 ) {
@@ -368,9 +369,15 @@ fbs_lineplot <- function(
   p <- to_plot %>%
     ggplot2::ggplot(aesthetic) +
     # Add bar plot
-    geom_fbsline() +
-    # Add line at 0
-    ggplot2::geom_hline(yintercept = 0)
+    geom_fbsline()
+
+  if (zero_axis) {
+    p <- p +
+      ggplot2::geom_hline(yintercept = 0)
+  } else {
+    p <- p +
+      ggplot2::geom_hline(aes(yintercept = min(y)))
+  }
 
   # Add labels
   p <- p +
