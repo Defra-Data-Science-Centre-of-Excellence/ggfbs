@@ -92,6 +92,7 @@ check_aesthetic <- function(aesthetic) {
 #' \code{fbs_distribution_plot()} and "comma" for all other plots.
 #' @param font Change the default font.
 #' @param text_scale Scale up or down the text size within the plot.
+#' @param zero_axis Should the y axis on \code{fbs_lineplot()} start at zero. Default: TRUE.
 #' @return Returns a ggplot object
 #' @examples
 #' \dontrun{
@@ -358,7 +359,7 @@ fbs_lineplot <- function(
   value_name = NULL,
   legend_hide = FALSE,
   continuous_format = "comma",
-  zero_axis = FALSE,
+  zero_axis = TRUE,
   font = "sans",
   text_scale = 1
 ) {
@@ -376,7 +377,7 @@ fbs_lineplot <- function(
       ggplot2::geom_hline(yintercept = 0)
   } else {
     p <- p +
-      ggplot2::geom_hline(aes(yintercept = min(y)))
+      ggplot2::geom_hline(ggplot2::aes(yintercept = min(.data[[rlang::as_name(aesthetic[["y"]])]])))
   }
 
   # Add labels
