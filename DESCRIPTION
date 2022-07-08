@@ -16,4 +16,4 @@ Imports:
     magrittr (>= 2.0.1)
 Suggests: 
     testthat (>= 3.0.0)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2

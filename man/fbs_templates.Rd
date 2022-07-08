@@ -52,6 +52,7 @@ fbs_lineplot(
   value_name = NULL,
   legend_hide = FALSE,
   continuous_format = "comma",
+  zero_axis = TRUE,
   font = "sans",
   text_scale = 1
 )
@@ -88,6 +89,8 @@ One of "identity", "comma", "percent", "abbreviated" or "scientific". Defaults t
 \item{font}{Change the default font.}
 
 \item{text_scale}{Scale up or down the text size within the plot.}
+
+\item{zero_axis}{Should the y axis on \code{fbs_lineplot()} start at zero. Default: TRUE.}
 }
 \value{
 Returns a ggplot object

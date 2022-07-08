@@ -126,7 +126,7 @@ test_that("4.1 fbs_lineplot generates base plot with no error", {
           21000)
   )
 
- p <-  plot_data %>%
+ p <- plot_data %>%
     fbs_lineplot(ggplot2::aes(x = x, y = y, group = 1))
 
   expect_true(ggplot2::is.ggplot(p))
@@ -147,6 +147,25 @@ test_that("4.2 fbs_lineplot generates base plot when x is continuous", {
 
   p <- plot_data %>%
     fbs_lineplot(ggplot2::aes(x = x, y = y))
+
+  expect_true(ggplot2::is.ggplot(p))
+  expect_silent(print(p))
+
+})
+
+test_that("4.3 fbs_lineplot generates plot when zero_axis=FALSE", {
+
+  plot_data <- data.frame(
+    x = c("2010",
+          "2011",
+          "2012"),
+    y = c(20000,
+          17000,
+          21000)
+  )
+
+  p <-  plot_data %>%
+    fbs_lineplot(ggplot2::aes(x = x, y = y, group = 1), zero_axis = FALSE)
 
   expect_true(ggplot2::is.ggplot(p))
   expect_silent(print(p))
