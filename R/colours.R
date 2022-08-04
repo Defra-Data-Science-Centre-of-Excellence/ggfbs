@@ -1,4 +1,4 @@
-# Default GSS colours
+# GSS colours
 gss_colours <- c(
   "dark-blue" = "#12436d",
   "turquoise" = "#28a197",
@@ -8,7 +8,7 @@ gss_colours <- c(
   "plum" = "#a285d1"
 )
 
-# Legacy gov.uk colours
+# gov.uk colours
 govuk_colours <- c(
   "blue" = "#1d70b8",
   "turquoise" = "#28a197",
@@ -21,10 +21,6 @@ govuk_colours <- c(
   "black" = "#0b0c0c"
 )
 
-# Default colour to use if no govuk scale need be applied.
-# Currently the first colour in govuk_colours(): "blue" = "#1d70b8"
-default_colour <- gss_colours[[1]]
-
 #' Colour functions
 #'
 #' Generate a named vector of colours in the order they would appear within the
@@ -32,24 +28,22 @@ default_colour <- gss_colours[[1]]
 #'
 #' Default colour palette: gss.
 #'
-#' @param ... character or numeric vector denoting the colours of the palette to return. See details
-#' for list of colours
-#' @return Named vector of colours.
+#' @param ... character or numeric vector denoting the colours of the palette to return.
 #' @examples
 #' # Return all colours in the palette
-#' govuk_cols()
+#' gss_cols()
 #'
 #' # Return the first colour in the palette by number
-#' govuk_cols(1)
+#' gss_cols(1)
 #'
 #' # Return multiple colours in palette by number
-#' govuk_cols(1:3)
-#' govuk_cols(3:6)
+#' gss_cols(1:3)
+#' gss_cols(3:6)
 #'
 #' # Return colours by name
-#' govuk_cols("blue")
-#' govuk_cols(c("blue", "turquoise", "green", "light-green"))
-#' @name colours
+#' gss_cols("dark-blue")
+#' gss_cols(c("dark-blue", "turquoise", "dark-pink", "orange"))
+#' @name ggfbs_colours
 #' @export
 gss_cols <- function(...) {
   cols <- c(...)
@@ -61,7 +55,7 @@ gss_cols <- function(...) {
   gss_colours[cols]
 }
 
-#' @rdname colours
+#' @rdname ggfbs_colours
 #' @export
 govuk_cols <- function(...) {
   cols <- c(...)
@@ -75,23 +69,27 @@ govuk_cols <- function(...) {
 
 #' Colour Palettes
 #'
-#' Palette functions similar to those found within the scales package.
+#' Palette functions similar to those found within the scales package. (e.g.
+#' \code{\link[scales]{hue_pal}}).
 #'
 #' Default colour palate: gss.
 #'
 #' @details
-#' Calling the these functions will return the palette function passed into
+#' Calling these functions will return the palette function passed into
 #' \code{\link{scale_colour_govuk}} and \code{\link[=scale_colour_govuk]{scale_fill_govuk}}.
 #'
 #' This function can also be used to return a character vector containing \code{x} number of
-#' colours with the syntax \code{govuk_pal()(x)}. For example, \code{govuk_pal()(5)} will return a
-#' character vector of 5 colours. \strong{Note}: Unlike \code{\link{govuk_cols}}, named colours are
+#' colours with the syntax \code{gss_pal()(x)}. For example, \code{gss_pal()(5)} will return a
+#' character vector of 5 colours. \strong{Note}: Unlike \code{\link{gss_cols}}, named colours are
 #' not accepted. Only a single number may be passed into the palette.
-#'
-#' @return
-#' Palette function similar to those found in the scales package (e.g.
-#' \code{\link[scales]{hue_pal}}).
 #' @examples
+#' # Return the palette function
+#' gss_pal()
+#' govuk_pal()
+#'
+#' # Return a vector of colours
+#' gss_pal()(4)
+#' govuk_pal()(4)
 #' @name pallettes
 #' @export
 gss_pal <- function() {

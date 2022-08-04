@@ -6,17 +6,20 @@ set_palette <- function(pal) {
   )
 }
 
-#' Discrete scales in the gov.uk style
+#' Discrete scales with default styling
 #'
-#' Provides a discrete colour scheme in the gov.uk type. See \code{\link{govuk_cols}} for the list
-#' of colours used within these scales.
+#' Provides a discrete colour scheme in the gov.uk style See
+#' \code{\link{ggfbs_colours}} for the list of colours used within these scales.
 #'
 #' @details
+#' These scales apply the default colour scheme for publishing on gov.uk,
+#' defaulting to \code{gss}.
+#'
 #' These scales are automatically applied within each chart template when their respective
 #' aesthetics is provided within the aesthetic specification.
 #'
-#' These scales can additionally be added to non-template charts to provide the colour scheme used
-#' within the templates.
+#' @param palette Character string indicating the colour scheme to apply to
+#' scale. Default = gss
 #' @param ... Other arguments passed on to \link[ggplot2]{discrete_scale}
 #' @examples
 #' \dontrun{
@@ -30,12 +33,12 @@ set_palette <- function(pal) {
 #' \code{\link[ggplot2]{discrete_scale}}
 #' @name scale_colour_govuk
 #' @export
-scale_colour_govuk <- function(palette = "gss", ...) {
+scale_colour_govuk <- function(palette = getOption("ggfbs.default_palette"), ...) {
   ggplot2::discrete_scale("colour", "govuk", set_palette(palette), ...)
 }
 
 #' @rdname scale_colour_govuk
 #' @export
-scale_fill_govuk <- function(palette = "gss", ...) {
+scale_fill_govuk <- function(palette = getOption("ggfbs.default_palette"), ...) {
   ggplot2::discrete_scale("fill", "govuk", set_palette(palette), ...)
 }
