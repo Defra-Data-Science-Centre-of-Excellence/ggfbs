@@ -23,7 +23,7 @@ govuk_colours <- c(
 
 # Default colour to use if no govuk scale need be applied.
 # Currently the first colour in govuk_colours(): "blue" = "#1d70b8"
-default_colour <- govuk_colours[[1]]
+default_colour <- gss_colours[[1]]
 
 #' Colour functions
 #'
@@ -96,13 +96,13 @@ govuk_cols <- function(...) {
 #' @export
 gss_pal <- function() {
   function(n) {
-    col_len <- length(govuk_cols())
+    col_len <- length(gss_cols())
     if (n > col_len) {
       warning(
         paste0("Number of breaks (", n, ") exceeds colours in palette (", col_len, ")")
       )
     }
-    unname(govuk_cols(1:n))
+    unname(gss_cols(1:n))
   }
 }
 
