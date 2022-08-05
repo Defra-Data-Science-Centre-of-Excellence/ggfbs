@@ -95,7 +95,8 @@ fbs_barplot <- function(
   legend_hide = FALSE,
   continuous_format = "comma",
   font = "sans",
-  text_scale = 1
+  text_scale = 1,
+  palette = getOption("ggfbs.default_palette")
 ) {
 
   aes_spec <- check_aesthetic(aesthetic)
@@ -106,7 +107,7 @@ fbs_barplot <- function(
   p <- to_plot %>%
     ggplot2::ggplot(aesthetic) +
     # Add bar plot
-    geom_fbsbar() +
+    geom_fbsbar(fill = set_palette(palette)(1)) +
     # Add line at 0
     ggplot2::geom_hline(yintercept = 0)
 
@@ -165,7 +166,7 @@ fbs_barplot <- function(
   # Add scale if fill passed into aesthetic
   if (aes_spec$fill) {
     p <- p +
-      scale_fill_govuk()
+      scale_fill_govuk(palette = palette)
   }
 
   # Add theme
@@ -196,7 +197,8 @@ fbs_stackplot <- function(
   legend_hide = FALSE,
   continuous_format = "comma",
   font = "sans",
-  text_scale = 1
+  text_scale = 1,
+  palette = getOption("ggfbs.default_palette")
 ) {
 
   to_plot <- data
@@ -205,7 +207,7 @@ fbs_stackplot <- function(
   p <- to_plot %>%
     ggplot2::ggplot(aesthetic) +
     # Add bar plot
-    ggplot2::geom_bar(stat = "identity", position = ggplot2::position_stack(), width = 0.75) +
+    geom_fbsbar(position = ggplot2::position_stack()) +
     # Add line at 0
     ggplot2::geom_hline(yintercept = 0)
 
@@ -236,7 +238,7 @@ fbs_stackplot <- function(
   }
 
   p <- p +
-    scale_fill_govuk()
+    scale_fill_govuk(palette = palette)
 
   # Add theme
   p <- p +
@@ -266,7 +268,8 @@ fbs_distribution_plot <- function(
   legend_hide = FALSE,
   continuous_format = "percent",
   font = "sans",
-  text_scale = 1
+  text_scale = 1,
+  palette = getOption("ggfbs.default_palette")
 ) {
 
   aes_spec <- check_aesthetic(aesthetic)
@@ -277,7 +280,7 @@ fbs_distribution_plot <- function(
   p <- to_plot %>%
     ggplot2::ggplot(aesthetic) +
     # Add bar plot
-    ggplot2::geom_bar(stat = "identity", position = ggplot2::position_fill(), width = 0.75) +
+    geom_fbsbar(position = ggplot2::position_fill()) +
     # Add line at 0
     ggplot2::geom_hline(yintercept = 0)
 
@@ -311,7 +314,7 @@ fbs_distribution_plot <- function(
   }
 
   p <- p +
-    scale_fill_govuk()
+    scale_fill_govuk(palette = palette)
 
   # Add theme
   p <- p +
@@ -341,7 +344,8 @@ fbs_lineplot <- function(
   continuous_format = "comma",
   zero_axis = TRUE,
   font = "sans",
-  text_scale = 1
+  text_scale = 1,
+  palette = getOption("ggfbs.default_palette")
 ) {
 
   to_plot <- data
@@ -350,7 +354,7 @@ fbs_lineplot <- function(
   p <- to_plot %>%
     ggplot2::ggplot(aesthetic) +
     # Add bar plot
-    geom_fbsline()
+    geom_fbsline(colour = set_palette(palette)(1))
 
   if (zero_axis) {
     p <- p +
@@ -378,7 +382,7 @@ fbs_lineplot <- function(
   }
 
   p <- p +
-    scale_colour_govuk()
+    scale_colour_govuk(palette = palette)
 
   # Add default styling and additional styling for line plot
   p <- p +
