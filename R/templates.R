@@ -102,15 +102,19 @@ fbs_barplot <- function(
 
   aes_spec <- check_aesthetic(aesthetic)
 
-  to_plot <- data
+  # Initial ggplot object
+  p <- ggplot2::ggplot(data, aesthetic)
 
-  # Primary geom
-  p <- to_plot %>%
-    ggplot2::ggplot(aesthetic) +
-    # Add bar plot
-    geom_fbsbar(fill = set_palette(palette)(1)) +
-    # Add line at 0
-    ggplot2::geom_hline(yintercept = 0)
+  # Add primary geom
+  # Modify default colour if palette is change and no fill aesthetic supplied
+  if (any(identical(getOption("ggfbs.default_palette"), palette), aes_spec$fill)) {
+    p <- p + geom_fbsbar()
+  } else {
+    p <- p + geom_fbsbar(fill = set_palette(palette)(1))
+  }
+
+  # Add line at 0
+  p <- p + ggplot2::geom_hline(yintercept = 0)
 
   # Add error bars if needed
   if (!is.null(error)) {
@@ -202,10 +206,8 @@ fbs_stackplot <- function(
   palette = getOption("ggfbs.default_palette")
 ) {
 
-  to_plot <- data
-
   # Primary geom
-  p <- to_plot %>%
+  p <- data %>%
     ggplot2::ggplot(aesthetic) +
     # Add bar plot
     geom_fbsbar(position = ggplot2::position_stack()) +
@@ -275,10 +277,8 @@ fbs_distribution_plot <- function(
 
   aes_spec <- check_aesthetic(aesthetic)
 
-  to_plot <- data
-
   # Primary geom
-  p <- to_plot %>%
+  p <- data %>%
     ggplot2::ggplot(aesthetic) +
     # Add bar plot
     geom_fbsbar(position = ggplot2::position_fill()) +
@@ -349,14 +349,20 @@ fbs_lineplot <- function(
   palette = getOption("ggfbs.default_palette")
 ) {
 
-  to_plot <- data
+  aes_spec <- check_aesthetic(aesthetic)
 
-  # Primary geom
-  p <- to_plot %>%
-    ggplot2::ggplot(aesthetic) +
-    # Add bar plot
-    geom_fbsline(colour = set_palette(palette)(1))
+  # Initial ggplot object
+  p <- ggplot2::ggplot(data, aesthetic)
 
+  # Add primary geom
+  # Modify default colour if palette is change and no colour aesthetic supplied
+  if (any(identical(getOption("ggfbs.default_palette"), palette), aes_spec$colour)) {
+    p <- p + geom_fbsline()
+  } else {
+    p <- p + geom_fbsline(colour = set_palette(palette)(1))
+  }
+
+  # Modify x axis position
   if (zero_axis) {
     p <- p +
       ggplot2::geom_hline(yintercept = 0)
@@ -370,7 +376,7 @@ fbs_lineplot <- function(
     ggplot2::labs(title = title, subtitle = value_name)
 
   # Add scales
-  if (is.double(to_plot[[rlang::as_name(aesthetic[["x"]])]])) {
+  if (is.double(data[[rlang::as_name(aesthetic[["x"]])]])) {
     p <- p +
       ggplot2::scale_x_continuous()
   } else {

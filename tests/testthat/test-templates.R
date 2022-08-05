@@ -67,11 +67,17 @@ test_that("1.5 fbs_barplot generates plot when switching palette", {
     f = c("x", "y", "x", "y", "x", "y")
   )
 
-  p <- plot_data %>%
+  p1 <- plot_data %>%
     fbs_barplot(ggplot2::aes(x = x, y = y, fill = f), palette = "govuk")
 
-  expect_true(ggplot2::is.ggplot(p))
-  expect_silent(print(p))
+  p2 <- plot_data %>%
+    fbs_barplot(ggplot2::aes(x = x, y = y), palette = "govuk")
+
+  expect_true(ggplot2::is.ggplot(p1))
+  expect_silent(print(p1))
+
+  expect_true(ggplot2::is.ggplot(p2))
+  expect_silent(print(p2))
 })
 
 # 2. fbs_stackplot ----
@@ -233,8 +239,8 @@ test_that("4.4 fbs_lineplot generates plot with colour aesthetic", {
     c = c("x", "y")
   )
 
-  p <-  plot_data %>%
-    fbs_lineplot(ggplot2::aes(x = x, y = y, group = c, colour = c), palette = "govuk")
+  p <- plot_data %>%
+    fbs_lineplot(ggplot2::aes(x = x, y = y, group = c, colour = c))
 
   expect_true(ggplot2::is.ggplot(p))
   expect_silent(print(p))
@@ -244,17 +250,26 @@ test_that("4.4 fbs_lineplot generates plot with colour aesthetic", {
 test_that("4.5 fbs_lineplot generates plot when switching palette", {
 
   plot_data <- data.frame(
-    x = c("2010",
-          "2011",
-          "2012"),
-    y = c(20000,
-          17000,
-          21000)
+    x = c("2010", "2011", "2012"),
+    y = c(20000, 17000, 21000)
   )
 
-  p <- plot_data %>%
+  p1 <- plot_data %>%
     fbs_lineplot(ggplot2::aes(x = x, y = y, group = 1), palette = "govuk")
 
-  expect_true(ggplot2::is.ggplot(p))
-  expect_silent(print(p))
+  plot_data <- data.frame(
+    x = c("2010", "2010", "2011", "2011", "2012", "2012"),
+    y = c(10000, 8000, 8000, 6000, 10000, 8000),
+    c = c("x", "y")
+  )
+
+  p2 <- plot_data %>%
+    fbs_lineplot(ggplot2::aes(x = x, y = y, group = c, colour = c), palette = "govuk")
+
+
+  expect_true(ggplot2::is.ggplot(p1))
+  expect_silent(print(p1))
+
+  expect_true(ggplot2::is.ggplot(p2))
+  expect_silent(print(p2))
 })
