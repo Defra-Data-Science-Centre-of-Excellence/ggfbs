@@ -73,6 +73,7 @@ check_aesthetic <- function(aesthetic) {
 #' @param font Change the default font.
 #' @param text_scale Scale up or down the text size within the plot.
 #' @param zero_axis Should the y axis on \code{fbs_lineplot()} start at zero. Default: TRUE.
+#' @param palette Change the default colour palette applied to template.
 #' @return Returns a ggplot object
 #' @examples
 #' \dontrun{
