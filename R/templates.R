@@ -1,23 +1,3 @@
-# Unused function
-# Previously called within fbs_barplot() to generate error bars
-# This functionality now sits wholly within fbs_barplot()
-# If error bar implementation becomes too length it can be separated again in the future
-add_error_bars <- function(data, values, ci) {
-  ggplot2::geom_errorbar(
-    ggplot2::aes(ymax = mean + confidence_interval, ymin = mean - confidence_interval),
-    width = 0.2,
-    position = ggplot2::position_dodge(0.75)
-  )
-}
-
-# Unused function
-# Previously called within fbs_barplot() as part of label implementation
-# This is now down for the user to add after fbs_barplot() has been called
-set_label_position <- function(max_value, position_scaler = 0.025) {
-  pos <- position_scaler * 10 ^ floor(log(max_value, 10))
-  pos
-}
-
 # Helper function for the `continuous_format` argument
 format_label_continuous <- function(label_format, ...) {
   switch(label_format,
