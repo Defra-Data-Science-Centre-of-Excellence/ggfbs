@@ -1,7 +1,7 @@
 # Bar plot
 GeomfbsBar <- ggplot2::ggproto("GeomfbsBar", ggplot2::GeomBar,
                                default_aes = ggplot2::aes(
-                                 colour = NA, fill = default_colour,
+                                 colour = NA, fill = getOption("ggfbs.default_colour"),
                                  size = 0.5, linetype = 1, alpha = NA)
                                )
 
@@ -45,7 +45,7 @@ geom_fbsbar <- function(mapping = NULL,
 # Line plot
 GeomfbsLine <- ggplot2::ggproto("GeomfbsLine", ggplot2::GeomLine,
                                 default_aes = ggplot2::aes(
-                                  colour = default_colour,
+                                  colour = getOption("ggfbs.default_colour"),
                                   size = 1.5, linetype = 1, alpha = NA)
 )
 

@@ -1,23 +1,3 @@
-# Unused function
-# Previously called within fbs_barplot() to generate error bars
-# This functionality now sits wholly within fbs_barplot()
-# If error bar implementation becomes too length it can be separated again in the future
-add_error_bars <- function(data, values, ci) {
-  ggplot2::geom_errorbar(
-    ggplot2::aes(ymax = mean + confidence_interval, ymin = mean - confidence_interval),
-    width = 0.2,
-    position = ggplot2::position_dodge(0.75)
-  )
-}
-
-# Unused function
-# Previously called within fbs_barplot() as part of label implementation
-# This is now down for the user to add after fbs_barplot() has been called
-set_label_position <- function(max_value, position_scaler = 0.025) {
-  pos <- position_scaler * 10 ^ floor(log(max_value, 10))
-  pos
-}
-
 # Helper function for the `continuous_format` argument
 format_label_continuous <- function(label_format, ...) {
   switch(label_format,
@@ -93,6 +73,7 @@ check_aesthetic <- function(aesthetic) {
 #' @param font Change the default font.
 #' @param text_scale Scale up or down the text size within the plot.
 #' @param zero_axis Should the y axis on \code{fbs_lineplot()} start at zero. Default: TRUE.
+#' @param palette Change the default colour palette applied to template.
 #' @return Returns a ggplot object
 #' @examples
 #' \dontrun{
@@ -115,20 +96,25 @@ fbs_barplot <- function(
   legend_hide = FALSE,
   continuous_format = "comma",
   font = "sans",
-  text_scale = 1
+  text_scale = 1,
+  palette = getOption("ggfbs.default_palette")
 ) {
 
   aes_spec <- check_aesthetic(aesthetic)
 
-  to_plot <- data
+  # Initial ggplot object
+  p <- ggplot2::ggplot(data, aesthetic)
 
-  # Primary geom
-  p <- to_plot %>%
-    ggplot2::ggplot(aesthetic) +
-    # Add bar plot
-    geom_fbsbar() +
-    # Add line at 0
-    ggplot2::geom_hline(yintercept = 0)
+  # Add primary geom
+  # Modify default colour if palette is change and no fill aesthetic supplied
+  if (any(identical(getOption("ggfbs.default_palette"), palette), aes_spec$fill)) {
+    p <- p + geom_fbsbar()
+  } else {
+    p <- p + geom_fbsbar(fill = set_palette(palette)(1))
+  }
+
+  # Add line at 0
+  p <- p + ggplot2::geom_hline(yintercept = 0)
 
   # Add error bars if needed
   if (!is.null(error)) {
@@ -185,7 +171,7 @@ fbs_barplot <- function(
   # Add scale if fill passed into aesthetic
   if (aes_spec$fill) {
     p <- p +
-      scale_fill_govuk()
+      scale_fill_govuk(palette = palette)
   }
 
   # Add theme
@@ -216,16 +202,15 @@ fbs_stackplot <- function(
   legend_hide = FALSE,
   continuous_format = "comma",
   font = "sans",
-  text_scale = 1
+  text_scale = 1,
+  palette = getOption("ggfbs.default_palette")
 ) {
 
-  to_plot <- data
-
   # Primary geom
-  p <- to_plot %>%
+  p <- data %>%
     ggplot2::ggplot(aesthetic) +
     # Add bar plot
-    ggplot2::geom_bar(stat = "identity", position = ggplot2::position_stack(), width = 0.75) +
+    geom_fbsbar(position = ggplot2::position_stack()) +
     # Add line at 0
     ggplot2::geom_hline(yintercept = 0)
 
@@ -256,7 +241,7 @@ fbs_stackplot <- function(
   }
 
   p <- p +
-    scale_fill_govuk()
+    scale_fill_govuk(palette = palette)
 
   # Add theme
   p <- p +
@@ -286,18 +271,17 @@ fbs_distribution_plot <- function(
   legend_hide = FALSE,
   continuous_format = "percent",
   font = "sans",
-  text_scale = 1
+  text_scale = 1,
+  palette = getOption("ggfbs.default_palette")
 ) {
 
   aes_spec <- check_aesthetic(aesthetic)
 
-  to_plot <- data
-
   # Primary geom
-  p <- to_plot %>%
+  p <- data %>%
     ggplot2::ggplot(aesthetic) +
     # Add bar plot
-    ggplot2::geom_bar(stat = "identity", position = ggplot2::position_fill(), width = 0.75) +
+    geom_fbsbar(position = ggplot2::position_fill()) +
     # Add line at 0
     ggplot2::geom_hline(yintercept = 0)
 
@@ -331,7 +315,7 @@ fbs_distribution_plot <- function(
   }
 
   p <- p +
-    scale_fill_govuk()
+    scale_fill_govuk(palette = palette)
 
   # Add theme
   p <- p +
@@ -361,17 +345,24 @@ fbs_lineplot <- function(
   continuous_format = "comma",
   zero_axis = TRUE,
   font = "sans",
-  text_scale = 1
+  text_scale = 1,
+  palette = getOption("ggfbs.default_palette")
 ) {
 
-  to_plot <- data
+  aes_spec <- check_aesthetic(aesthetic)
 
-  # Primary geom
-  p <- to_plot %>%
-    ggplot2::ggplot(aesthetic) +
-    # Add bar plot
-    geom_fbsline()
+  # Initial ggplot object
+  p <- ggplot2::ggplot(data, aesthetic)
 
+  # Add primary geom
+  # Modify default colour if palette is change and no colour aesthetic supplied
+  if (any(identical(getOption("ggfbs.default_palette"), palette), aes_spec$colour)) {
+    p <- p + geom_fbsline()
+  } else {
+    p <- p + geom_fbsline(colour = set_palette(palette)(1))
+  }
+
+  # Modify x axis position
   if (zero_axis) {
     p <- p +
       ggplot2::geom_hline(yintercept = 0)
@@ -385,7 +376,7 @@ fbs_lineplot <- function(
     ggplot2::labs(title = title, subtitle = value_name)
 
   # Add scales
-  if (is.double(to_plot[[rlang::as_name(aesthetic[["x"]])]])) {
+  if (is.double(data[[rlang::as_name(aesthetic[["x"]])]])) {
     p <- p +
       ggplot2::scale_x_continuous()
   } else {
@@ -398,7 +389,7 @@ fbs_lineplot <- function(
   }
 
   p <- p +
-    scale_colour_govuk()
+    scale_colour_govuk(palette = palette)
 
   # Add default styling and additional styling for line plot
   p <- p +
