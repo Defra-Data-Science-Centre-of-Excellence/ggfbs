@@ -16,8 +16,6 @@ ggfbs
         arguement:](#3-use-the-text_scale-arguement)
 -   [Help and Resources](#help-and-resources)
 
-<hr>
-
 ## Overview
 
 ggfbs is a package containing convenient functions to create publication
@@ -45,8 +43,6 @@ Pipelines (RAP).
 
 ## Installation
 
-<hr>
-
 For those with access to the Defra Data Science Centre of Excellence
 organisations, the package can be installed directly through R through
 one of the methods below. If you do not have access to the Github
@@ -70,8 +66,6 @@ install.packages("~/Downloads/ggfbs.zip", repos=NULL)
 ```
 
 ## Usage
-
-<hr>
 
 There are three main ways this package may be used:
 
@@ -161,8 +155,8 @@ legend and instead label the lines directly.
 Here we set the `legend_hide` argument to `TRUE` within `fbs_lineplot()`
 and create two annotation layers, allowing us to finely control the
 position and size of the label. Additionally, to ensure consistency with
-our theme, we use the `govuk_cols()` helper function to match the
-colours of the text to those of the lines.
+our theme, we use the `gss_cols()` helper function to match the colours
+of the text to those of the lines.
 
 ``` r
 p3 <- plot_data %>% 
@@ -180,7 +174,7 @@ p3 <- plot_data %>%
     y = c(75000, 45000),
     label = c("Cereals" ,"All Farms"),
     size = 8,
-    colour = govuk_cols(1:2)
+    colour = gss_cols(1:2)
   )
 
 p3
@@ -207,8 +201,6 @@ p4
 ![](examples/usage-boxplot-1-1.png)<!-- -->
 
 ## Export Chart
-
-<hr>
 
 By default, the theme applied to the charts within this package is
 optimised for publication on gov.uk. For the charts to output correctly
@@ -254,8 +246,6 @@ the size of the text by 50%. These charts can then be exported through
 any of the usual methods.
 
 ## Help and Resources
-
-<hr>
 
 Data visualisation and ggplot2
 

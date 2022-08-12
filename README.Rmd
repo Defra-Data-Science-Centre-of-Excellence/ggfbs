@@ -4,7 +4,7 @@ output:
   github_document:
     toc: true
 ---
-<hr>
+
 ```{R setup, include=FALSE}
 library(tidyverse)
 library(ggfbs)
@@ -23,7 +23,6 @@ Along with ggfbs, the FBS team has developed several tools for working with FBS 
 * [FBSCore](https://github.com/Defra-Data-Science-Centre-of-Excellence/FBSCore ): Core functions for extracting and working with FBS data. A full package reference is also available [here](http://fbs.int.sce.network/shiny/fbscore/).
 
 ## Installation
-<hr>
 
 For those with access to the Defra Data Science Centre of Excellence organisations, the package can be installed directly through R through one of the methods below. If you do not have access to the Github organisation please contact the FBS team directly on [fbs.queries@defra.gov.uk](mailto:fbs.queries@defra.gov.uk) to request a copy via email.
 
@@ -40,7 +39,7 @@ install.packages("~/Downloads/ggfbs.zip", repos=NULL)
 ```
 
 ## Usage
-<hr>
+
 There are three main ways this package may be used:
 
 1. Utilise the in built templates to create basic charts.
@@ -112,7 +111,7 @@ p2
 
 When creating a line chart, it is sometimes preferable to omit the legend and instead label the lines directly.
 
-Here we set the `legend_hide` argument to `TRUE` within `fbs_lineplot()` and create two annotation layers, allowing us to finely control the position and size of the label. Additionally, to ensure consistency with our theme, we use the `govuk_cols()` helper function to match the colours of the text to those of the lines.
+Here we set the `legend_hide` argument to `TRUE` within `fbs_lineplot()` and create two annotation layers, allowing us to finely control the position and size of the label. Additionally, to ensure consistency with our theme, we use the `gss_cols()` helper function to match the colours of the text to those of the lines.
 
 ```{r usage-lineplot-3, fig.width=960/72, fig.height=640/72, dpi=72}
 p3 <- plot_data %>% 
@@ -130,7 +129,7 @@ p3 <- plot_data %>%
     y = c(75000, 45000),
     label = c("Cereals" ,"All Farms"),
     size = 8,
-    colour = govuk_cols(1:2)
+    colour = gss_cols(1:2)
   )
 
 p3
@@ -151,7 +150,7 @@ p4
 ```
 
 ## Export Chart
-<hr>
+
 By default, the theme applied to the charts within this package is optimised for publication on gov.uk. For the charts to output correctly the size and dpi of the charts must be set to:
 
 - wdith: 960
@@ -190,7 +189,7 @@ ggsave("bar-plot.png", p, width = 960/72, height = 640/72, dpi = 72)
 All templates allow you to scale the size of the text up or down through the `text_scale` argument. e.g. setting `text_scale` to `0.5` reduced the size of the text by 50%. These charts can then be exported through any of the usual methods.
 
 ## Help and Resources
-<hr>
+
 Data visualisation and ggplot2
 
 https://ggplot2.tidyverse.org/index.html  
