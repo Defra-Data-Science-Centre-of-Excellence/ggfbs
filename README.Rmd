@@ -20,7 +20,7 @@ ggfbs is a package containing convenient functions to create publication ready c
 Along with ggfbs, the FBS team has developed several tools for working with FBS data and to aid in the implemtations of Reproducible Analytical Pipelines (RAP).
 
 * [rgovspeak](https://github.com/Defra-Data-Science-Centre-of-Excellence/rgovspeak): Allows govspeak notation to be used within rmarkdown and provides html render functionality to preview your page as if it were published on gov.uk, along with a govspeak markdown template for rmarkdown
-* [FBSCore](https://github.com/Defra-Data-Science-Centre-of-Excellence/FBSCore ): Core functions for extracting and working with FBS data. A full package reference is also available [here](http://fbs.int.sce.network/shiny/fbscore/).
+* [FBSanalysis](https://github.com/Defra-Data-Science-Centre-of-Excellence/FBSanalysis): Core functions for extracting and working with FBS data.
 
 ## Installation
 
