@@ -18,7 +18,8 @@ fbs_barplot(
   legend_hide = FALSE,
   continuous_format = "comma",
   font = "sans",
-  text_scale = 1
+  text_scale = 1,
+  palette = getOption("ggfbs.default_palette")
 )
 
 fbs_stackplot(
@@ -30,7 +31,8 @@ fbs_stackplot(
   legend_hide = FALSE,
   continuous_format = "comma",
   font = "sans",
-  text_scale = 1
+  text_scale = 1,
+  palette = getOption("ggfbs.default_palette")
 )
 
 fbs_distribution_plot(
@@ -42,7 +44,8 @@ fbs_distribution_plot(
   legend_hide = FALSE,
   continuous_format = "percent",
   font = "sans",
-  text_scale = 1
+  text_scale = 1,
+  palette = getOption("ggfbs.default_palette")
 )
 
 fbs_lineplot(
@@ -54,7 +57,8 @@ fbs_lineplot(
   continuous_format = "comma",
   zero_axis = TRUE,
   font = "sans",
-  text_scale = 1
+  text_scale = 1,
+  palette = getOption("ggfbs.default_palette")
 )
 }
 \arguments{
@@ -89,6 +93,8 @@ One of "identity", "comma", "percent", "abbreviated" or "scientific". Defaults t
 \item{font}{Change the default font.}
 
 \item{text_scale}{Scale up or down the text size within the plot.}
+
+\item{palette}{Change the default colour palette applied to template.}
 
 \item{zero_axis}{Should the y axis on \code{fbs_lineplot()} start at zero. Default: TRUE.}
 }

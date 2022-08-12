@@ -3,25 +3,28 @@
 \name{scale_colour_govuk}
 \alias{scale_colour_govuk}
 \alias{scale_fill_govuk}
-\title{Discrete scales in the gov.uk style}
+\title{Discrete scales with default styling}
 \usage{
-scale_colour_govuk(...)
+scale_colour_govuk(palette = getOption("ggfbs.default_palette"), ...)
 
-scale_fill_govuk(...)
+scale_fill_govuk(palette = getOption("ggfbs.default_palette"), ...)
 }
 \arguments{
+\item{palette}{Character string indicating the colour scheme to apply to
+scale. Default = gss}
+
 \item{...}{Other arguments passed on to \link[ggplot2]{discrete_scale}}
 }
 \description{
-Provides a discrete colour scheme in the gov.uk type. See \code{\link{govuk_cols}} for the list
-of colours used within these scales.
+Provides a discrete colour scheme in the gov.uk style See
+\code{\link{ggfbs_colours}} for the list of colours used within these scales.
 }
 \details{
+These scales apply the default colour scheme for publishing on gov.uk,
+defaulting to \code{gss}.
+
 These scales are automatically applied within each chart template when their respective
 aesthetics is provided within the aesthetic specification.
-
-These scales can additionally be added to non-template charts to provide the colour scheme used
-within the templates.
 }
 \examples{
 \dontrun{
