@@ -1,7 +1,7 @@
 Package: ggfbs
 Type: Package
 Title: Data visualisations used by the FBS team
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: 
     person("Cristobal", "Rengifo Castillo", role = c("aut", "cre"), email = "cristobal.rengifo-castillo@defra.gov.uk")
 Description: Chart templates and utilities used by the Farm Business Survey (FBS) 
