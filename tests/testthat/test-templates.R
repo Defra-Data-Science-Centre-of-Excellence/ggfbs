@@ -273,3 +273,39 @@ test_that("4.5 fbs_lineplot generates plot when switching palette", {
   expect_true(ggplot2::is.ggplot(p2))
   expect_silent(print(p2))
 })
+
+test_that("4.6 fbs_lineplot works with colours and line types", {
+
+  plot_data <- data.frame(
+    x = c("2010", "2010", "2011", "2011", "2012", "2012"),
+    y = c(10000, 8000, 8000, 6000, 10000, 8000),
+    c = c("x", "y")
+  )
+
+  p <- plot_data %>%
+    fbs_lineplot(
+      ggplot2::aes(x = x, y = y, group = c, colour = c, linetype = c)
+    )
+
+  expect_true(ggplot2::is.ggplot(p))
+  expect_silent(print(p))
+})
+
+test_that("4.7 fbs_lineplot can produce series breaks with lines and colours", {
+
+  plot_data <- data.frame(
+    x = c("2010", "2010", "2011", "2011", "2011", "2011", "2012", "2012"),
+    y = c(10000, 8000, 8000, 7000, 9000, 6000, 10000, 8000),
+    c = c("x", "y"),
+    g = c("a", "a", "a", "a", "b", "b", "b", "b")
+  )
+
+  p <- plot_data %>%
+    fbs_lineplot(
+      ggplot2::aes(x = x, y = y, group = interaction(g, c), colour = c, linetype = c)
+    )
+
+  expect_true(ggplot2::is.ggplot(p))
+  expect_silent(print(p))
+
+})
