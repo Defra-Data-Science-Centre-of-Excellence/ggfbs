@@ -26,6 +26,24 @@ check_aesthetic <- function(aesthetic) {
   )
 }
 
+#
+create_aesthetic_errorbar <- function(data, aesthetic, error) {
+  if (length(error) == 1) {
+    # Create aesthetic for symmetrical errors with one column within the data
+    aes_error <- ggplot2::aes(
+      ymin = .data[[rlang::as_name(aesthetic[["y"]])]] - .data[[error]],
+      ymax = .data[[rlang::as_name(aesthetic[["y"]])]] + .data[[error]]
+    )
+  } else if (length(error) == 2) {
+    # Create aesthetic for errors with two columns with the data
+    aes_error <- ggplot2::aes(ymin = .data[[error[1]]], ymax = .data[[error[2]]])
+  } else {
+    stop(
+      "`error` must either be a single character or character vector of length 2"
+    )
+  }
+}
+
 # Chart Templates ----
 #' Plot Templates
 #'
@@ -118,22 +136,8 @@ fbs_barplot <- function(
 
   # Add error bars if needed
   if (!is.null(error)) {
-    # Check length of `error` argument passed
-    if (length(error) == 1) {
-      # Create aesthetic for symmetrical errors with one column within the data
-      aes_error <- ggplot2::aes(
-        ymin = .data[[rlang::as_name(aesthetic[["y"]])]] - .data[[error]],
-        ymax = .data[[rlang::as_name(aesthetic[["y"]])]] + .data[[error]]
-      )
-    } else if (length(error) == 2) {
-      # Create aesthetic for errors with two columns with the data
-      aes_error <- ggplot2::aes(ymin = .data[[error[1]]], ymax = .data[[error[2]]])
-    } else {
-      stop(
-        "`error` must either be a single character or character vector of length 2"
-      )
-    }
-    # Add error bars to plot
+    aes_error <- create_aesthetic_errorbar(data, aesthetic, error)
+
     p <- p +
       ggplot2::geom_errorbar(
         aes_error,
@@ -141,7 +145,7 @@ fbs_barplot <- function(
         position = ggplot2::position_dodge(0.75),
         size = 0.6,
         colour = "black"
-      )
+    )
   }
 
   # Add labels
