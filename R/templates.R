@@ -143,7 +143,7 @@ fbs_barplot <- function(
         aes_error,
         width = 0.2,
         position = ggplot2::position_dodge(0.75),
-        size = 0.6,
+        linewidth = 0.6,
         colour = "black"
     )
   }
