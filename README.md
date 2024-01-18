@@ -2,7 +2,7 @@ ggfbs
 ================
 
 -   [Overview](#overview)
--   [Other FBS tools](#other-fbs-tools)
+-   [Other tools](#other-tools)
 -   [Installation](#installation)
 -   [Usage](#usage)
     -   [Basic Chart Templates](#basic-chart-templates)
@@ -19,13 +19,15 @@ ggfbs
 ## Overview
 
 ggfbs is a package containing convenient functions to create publication
-ready charts with Defra’s Farm Business Survey (FBS) style. This package
-was built with and designed to work in conjunction with
+ready charts. This package was built with and designed to work in conjunction with
 [ggplot2](https://ggplot2.tidyverse.org/) and provides a set of
 templates to create basic chart whilst also allowing a deep level of
-customisation.
+customisation. Originally designed by Defra’s Farm Business Survey (FBS) 
+team, its usage is generic and can be used in any statistical publication or for general usage
+and incorperates style guidance and colour scales from the 
+[Analysis Function](https://analysisfunction.civilservice.gov.uk/).
 
-## Other FBS tools
+## Other tools
 
 Along with ggfbs, the FBS team has developed several tools for working
 with FBS data and to aid in the implemtations of Reproducible Analytical
@@ -36,26 +38,16 @@ Pipelines (RAP).
     html render functionality to preview your page as if it were
     published on gov.uk, along with a govspeak markdown template for
     rmarkdown
--   [FBSCore](https://github.com/Defra-Data-Science-Centre-of-Excellence/FBSCore):
-    Core functions for extracting and working with FBS data. A full
-    package reference is also available
-    [here](http://fbs.int.sce.network/shiny/fbscore/).
-
+    
 ## Installation
 
-For those with access to the Defra Data Science Centre of Excellence
-organisations, the package can be installed directly through R through
-one of the methods below. If you do not have access to the Github
-organisation please contact the FBS team directly on
-<fbs.queries@defra.gov.uk> to request a copy via email.
+The package can be installed directly through R using
+one of the methods below.
 
-If you have a http proxy setup and have created a [personal access
-token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token),
-install the package through R, replacing `my_token` with your personal
-access token.
+If you have a http proxy setup use:
 
 ``` r
-devtools::install_github("Defra-Data-Science-Centre-of-Excellence/ggfbs", auth_token = "my_token")
+devtools::install_github("Defra-Data-Science-Centre-of-Excellence/ggfbs")
 ```
 
 Otherwise, download the latest release and install the package in R
