@@ -1,20 +1,8 @@
-ggfbs
-================
+# ggfbs
 
--   [Overview](#overview)
--   [Other tools](#other-tools)
--   [Installation](#installation)
--   [Usage](#usage)
-    -   [Basic Chart Templates](#basic-chart-templates)
-    -   [Customise with ggplot2](#customise-with-ggplot2)
-    -   [Apply styling to your own
-        charts](#apply-styling-to-your-own-charts)
--   [Export Chart](#export-chart)
-    -   [1. Working in Rmarkdown:](#1-working-in-rmarkdown)
-    -   [2. Save your chart:](#2-save-your-chart)
-    -   [3. Use the `text_scale`
-        arguement:](#3-use-the-text_scale-arguement)
--   [Help and Resources](#help-and-resources)
+## Status
+
+ggfbs is superseded, please now use [afcharts](https://github.com/best-practice-and-impact/afcharts/). ggfbs will remain available for current users but will no longer receive any updates.
 
 ## Overview
 
